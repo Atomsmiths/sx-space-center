@@ -11,11 +11,9 @@ async function fetcher(url: string, query: string): Promise<void> {
     body: JSON.stringify({ query }),
   })
     .then((res) => {
-      console.log(res);
       return res.json();
     })
     .then((json) => {
-      console.log(json);
       return json.data;
     });
 }
@@ -27,10 +25,6 @@ const Home: NextPage = () => {
   );
 
   if (error) return <div>Failed to load</div>;
-
-  if (data) {
-    console.log(data);
-  }
 
   return (
     <div>

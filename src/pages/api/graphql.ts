@@ -15,8 +15,19 @@ const typeDefs = gql`
 
 const resolvers: Resolvers = {
   Query: {
-    nextMission() {
-      return [{ dateUnix: 1583556631 }];
+    nextMission: async () => {
+      return fetch("https://api.spacexdata.com/v4/launches/next", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((returnData) => {
+          return [{ dateUnix: returnData.date_unix }];
+        });
     },
   },
 };
