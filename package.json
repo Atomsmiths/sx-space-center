@@ -1,6 +1,7 @@
 {
   "name": "sx-space-center",
-  "private": true,
+  "version": "0.1.0",
+  "private": false,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -121,5 +122,8 @@
         }
       ]
     }
-  }
+  },
+    "browserslist": [
+    "last 2 versions, > 0.25%, not dead"
+  ]
 }
