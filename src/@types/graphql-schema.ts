@@ -22,12 +22,22 @@ export type Scalars = {
 
 export type Mission = {
   __typename?: "Mission";
-  dateUnix?: Maybe<Scalars["Int"]>;
+  dateUnix: Scalars["Int"];
+  details?: Maybe<Scalars["String"]>;
+  name: Scalars["String"];
+  patch?: Maybe<PatchLinks>;
+  rocket?: Maybe<Scalars["String"]>;
+};
+
+export type PatchLinks = {
+  __typename?: "PatchLinks";
+  large?: Maybe<Scalars["String"]>;
+  small?: Maybe<Scalars["String"]>;
 };
 
 export type Query = {
   __typename?: "Query";
-  nextMission?: Maybe<Array<Maybe<Mission>>>;
+  upcomingMission?: Maybe<Mission>;
 };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -140,6 +150,7 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
   Int: ResolverTypeWrapper<Scalars["Int"]>;
   Mission: ResolverTypeWrapper<Mission>;
+  PatchLinks: ResolverTypeWrapper<PatchLinks>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars["String"]>;
 };
@@ -149,6 +160,7 @@ export type ResolversParentTypes = {
   Boolean: Scalars["Boolean"];
   Int: Scalars["Int"];
   Mission: Mission;
+  PatchLinks: PatchLinks;
   Query: {};
   String: Scalars["String"];
 };
@@ -157,7 +169,24 @@ export type MissionResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["Mission"] = ResolversParentTypes["Mission"]
 > = {
-  dateUnix?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
+  dateUnix?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  details?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  patch?: Resolver<
+    Maybe<ResolversTypes["PatchLinks"]>,
+    ParentType,
+    ContextType
+  >;
+  rocket?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PatchLinksResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["PatchLinks"] = ResolversParentTypes["PatchLinks"]
+> = {
+  large?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  small?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -165,8 +194,8 @@ export type QueryResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
 > = {
-  nextMission?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes["Mission"]>>>,
+  upcomingMission?: Resolver<
+    Maybe<ResolversTypes["Mission"]>,
     ParentType,
     ContextType
   >;
@@ -174,5 +203,6 @@ export type QueryResolvers<
 
 export type Resolvers<ContextType = any> = {
   Mission?: MissionResolvers<ContextType>;
+  PatchLinks?: PatchLinksResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 };

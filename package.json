@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint \"{src,pages,bin,doc,tests}/**/*.{js,ts,jsx,tsx}\""
+    "lint": "eslint \"{src,pages}/**/*.{js,ts,tsx}\"",
+    "generate": "yarn graphql-codegen"
   },
   "dependencies": {
     "apollo-server-micro": "3.5.0",
