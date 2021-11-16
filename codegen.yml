@@ -1,6 +1,11 @@
-schema: ./src/pages/api/graphql.ts
+schema: ./src/graphql/schema.ts
+hooks:
+  afterAllFileWrite:
+    - prettier --write
 generates:
-  ./src/@types/resolvers.ts:
+  ./src/@types/graphql-schema.ts:
     plugins:
+      - add: 
+          content: ['// THIS IS A GENERATED FILE, DO NOT EDIT MANUALLY!', '/* eslint-disable */']
       - typescript
       - typescript-resolvers

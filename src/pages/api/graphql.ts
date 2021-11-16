@@ -1,36 +1,7 @@
-import { ApolloServer, gql } from "apollo-server-micro";
+import { ApolloServer } from "apollo-server-micro";
 
 import { Handler } from "@src/@types/handler";
-import { Resolvers } from "@src/@types/resolvers";
-
-const typeDefs = gql`
-  type Query {
-    nextMission: [Mission]
-  }
-
-  type Mission {
-    dateUnix: Int
-  }
-`;
-
-const resolvers: Resolvers = {
-  Query: {
-    nextMission: async () => {
-      return fetch("https://api.spacexdata.com/v4/launches/next", {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-        },
-      })
-        .then((response) => {
-          return response.json();
-        })
-        .then((returnData) => {
-          return [{ dateUnix: returnData.date_unix }];
-        });
-    },
-  },
-};
+import { resolvers, typeDefs } from "@src/graphql/schema";
 
 const apolloServer = new ApolloServer({ typeDefs, resolvers });
 
