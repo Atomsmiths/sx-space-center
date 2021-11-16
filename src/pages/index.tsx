@@ -18,9 +18,23 @@ async function fetcher(url: string, query: string): Promise<void> {
     });
 }
 
+const UPCOMING_MISSION_QUERY = `
+  query upcomingMission {
+    upcomingMission {
+      name
+      dateUnix
+      rocket
+      patch {
+        small
+        large
+      }
+    }
+  }
+`;
+
 const Home: NextPage = () => {
   const { data, error } = useSWR<any>(
-    ["/api/graphql", "{ nextMission { dateUnix } }"],
+    ["/api/graphql", UPCOMING_MISSION_QUERY],
     fetcher,
   );
 
@@ -34,7 +48,15 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1>SpaceX Space Center</h1>
-      {data ? <p>{data.nextMission[0].dateUnix}</p> : <p>Loading...</p>}
+      {data ? (
+        <div>
+          <p>{data.upcomingMission.name}</p>
+          <p>{data.upcomingMission.dateUnix}</p>
+          <p>{data.upcomingMission.rocket}</p>
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 };
