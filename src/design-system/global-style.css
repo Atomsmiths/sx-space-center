@@ -1,5 +1,12 @@
 @tailwind base;
+
 @layer base {
+  @font-face {
+    font-family: Nasalization;
+    src: url("../../public/font/nasalization.woff2") format("woff2"), 
+      url("../../public/font/nasalization.woff") format('woff');
+  }
+
   html {
     /* This font size means that '1rem' is exactly equal to '10px', which makes setting REM values very simple. */
     font-size: 62.5%;
@@ -7,11 +14,14 @@
 
   * {
     scroll-behavior: smooth;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    font-family: Nasalization, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  }
+
+  body {
+    font-size: 1.6rem;
   }
 }
 
 @tailwind components;
-
 @tailwind utilities;
