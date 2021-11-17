@@ -15,6 +15,7 @@ module.exports = {
       l: "1.8rem",
       xl: "2rem",
       "2xl": "2.2rem",
+      "6xl": "3.75rem",
     },
   },
   variants: {
