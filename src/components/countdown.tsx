@@ -1,6 +1,6 @@
 import React from "react";
 
-const UpcomingMissionCountdown: React.FC<{ unixDate: number }> = ({
+const UpcomingLaunchCountdown: React.FC<{ unixDate: number }> = ({
   unixDate,
 }) => {
   const [currentTime, setCurrentTime] = React.useState(
@@ -43,4 +43,4 @@ const UpcomingMissionCountdown: React.FC<{ unixDate: number }> = ({
   );
 };
 
-export { UpcomingMissionCountdown };
+export { UpcomingLaunchCountdown };

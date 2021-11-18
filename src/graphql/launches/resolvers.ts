@@ -1,30 +1,9 @@
-import { gql } from "apollo-server-micro";
+import { Launch } from "@src/@types/graphql-schema";
 
-import { Mission } from "@src/@types/graphql-schema";
-
-const typeDefs = gql`
-  type Query {
-    upcomingMission: Mission
-  }
-
-  type Mission {
-    name: String!
-    details: String
-    dateUnix: Int!
-    rocket: String
-    patch: PatchLinks
-  }
-
-  type PatchLinks {
-    small: String
-    large: String
-  }
-`;
-
-const resolvers = {
+const launchesResolvers = {
   Query: {
-    upcomingMission: async () => {
-      const data = await fetch("https://api.spacexdata.com/v4/launches/next", {
+    upcomingLaunch: async () => {
+      const data = await fetch("https://api.spacexdata.com/v5/launches/next", {
         method: "GET",
         headers: {
           "Content-type": "application/json",
@@ -33,7 +12,7 @@ const resolvers = {
         return response.json();
       });
 
-      let missionData: Mission = {
+      let launchData: Launch = {
         name: data.name,
         details: data.details,
         dateUnix: data.date_unix,
@@ -56,12 +35,12 @@ const resolvers = {
           return response.json();
         });
 
-        missionData = { ...missionData, rocket: rocketData.name };
+        launchData = { ...launchData, rocket: rocketData.name };
       }
 
-      return missionData;
+      return launchData;
     },
   },
 };
 
-export { typeDefs, resolvers };
+export { launchesResolvers };
