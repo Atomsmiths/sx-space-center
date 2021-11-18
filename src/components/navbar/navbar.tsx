@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { UrlObject } from "url";
 
+import { SpaceShuttle } from "../icons/space-shuttle";
 import classes from "./navbar.module.css";
 
 const NavLink: React.FC<{ href: string | UrlObject }> = ({
@@ -28,7 +29,8 @@ const Navbar: React.FC = () => {
   return (
     <nav className="hidden md:block mt-4">
       <ul className="flex justify-center text-l">
-        <li className="mx-6">
+        <SpaceShuttle classNames="text-gray-100" size="2.5rem" />
+        <li className="ml-12 mr-6">
           <NavLink href={"/"}>Home</NavLink>
         </li>
         <li className="mx-6">
@@ -40,9 +42,13 @@ const Navbar: React.FC = () => {
         <li className="mx-6">
           <NavLink href={"#"}>History</NavLink>
         </li>
-        <li className="mx-6">
+        <li className="mr-12 ml-6">
           <NavLink href={"#"}>Rockets</NavLink>
         </li>
+        <SpaceShuttle
+          size="2.5rem"
+          classNames="text-gray-100 transform rotate-180"
+        />
       </ul>
     </nav>
   );
