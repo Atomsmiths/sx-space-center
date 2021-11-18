@@ -22,25 +22,25 @@ const UpcomingLaunchCountdown: React.FC<{ dateUnix: number }> = ({
   const days = Math.floor(delta / 86400);
 
   return (
-    <div className="flex justify-center items-center">
-      <div className="w-3/12 lg:w-1/12 text-center">
-        <p className="text-2xl lg:text-9xl">{String(days).padStart(2, "0")}</p>
+    <div className="flex justify-center items-center lg:w-1/3 m-auto">
+      <div className="w-3/12 lg:w-1/4 text-center">
+        <p className="text-6xl lg:text-9xl">{String(days).padStart(2, "0")}</p>
         <p className="text-s lg:text-base">days</p>
       </div>
-      <div className="w-3/12 lg:w-1/12 text-center">
-        <p className="text-2xl lg:text-9xl">
+      <div className="w-3/12 lg:w-1/4 text-center">
+        <p className="text-6xl lg:text-9xl">
           {String(hours).padStart(2, "0")}{" "}
         </p>
         <p className="text-s lg:text-base">hours</p>
       </div>
-      <div className="w-3/12 lg:w-1/12 text-center">
-        <p className="text-2xl lg:text-9xl">
+      <div className="w-3/12 lg:w-1/4 text-center">
+        <p className="text-6xl lg:text-9xl">
           {String(minutes).padStart(2, "0")}
         </p>
         <p className="text-s lg:text-base">minutes</p>
       </div>
-      <div className="w-3/12 lg:w-1/12 text-center">
-        <p className="text-2xl lg:text-9xl">
+      <div className="w-3/12 lg:w-1/4 text-center">
+        <p className="text-6xl lg:text-9xl">
           {String(seconds).padStart(2, "0")}
         </p>
         <p className="text-s lg:text-base">seconds</p>
