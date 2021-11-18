@@ -10,6 +10,7 @@ const launches = gql`
     details: String
     dateUnix: Int!
     rocket: String
+    launchpad: Launchpad
     patch: PatchLinks
   }
 

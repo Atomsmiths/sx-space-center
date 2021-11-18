@@ -27,12 +27,19 @@ const Home: NextPage = () => {
 
   if (error) return <div>Failed to load</div>;
 
+  console.log(data && data.upcomingLaunch);
   return (
     <div>
       {data ? (
-        <div>
-          <p>{data.upcomingLaunch.name}</p>
-          <p>{data.upcomingLaunch.dateUnix}</p>
+        <div className="flex">
+          <div>
+            <p>Launch Name</p>
+            <p>{data.upcomingLaunch.name}</p>
+          </div>
+          <div>
+            <p>Rocket Name</p>
+            <p>{data.upcomingLaunch.rocket}</p>
+          </div>
           <p>{data.upcomingLaunch.rocket}</p>
         </div>
       ) : (
