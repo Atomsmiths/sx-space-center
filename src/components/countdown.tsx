@@ -24,19 +24,19 @@ const UpcomingLaunchCountdown: React.FC<{ unixDate: number }> = ({
   return (
     <div className="flex justify-center items-center">
       <div className="w-32 text-center">
-        <p className="text-6xl">{String(days).padStart(2, "0")}</p>
+        <p className="text-5xl">{String(days).padStart(2, "0")}</p>
         <p>days</p>
       </div>
       <div className="w-32 text-center">
-        <p className="text-6xl">{String(hours).padStart(2, "0")} </p>
+        <p className="text-5xl">{String(hours).padStart(2, "0")} </p>
         <p>hours</p>
       </div>
       <div className="w-32 text-center">
-        <p className="text-6xl">{String(minutes).padStart(2, "0")}</p>
+        <p className="text-5xl">{String(minutes).padStart(2, "0")}</p>
         <p>minutes</p>
       </div>
       <div className="w-32 text-center">
-        <p className="text-6xl">{String(seconds).padStart(2, "0")}</p>
+        <p className="text-5xl">{String(seconds).padStart(2, "0")}</p>
         <p>seconds</p>
       </div>
     </div>
