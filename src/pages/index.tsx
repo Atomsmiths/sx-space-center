@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import useSWR from "swr";
 
+import { UpcomingLaunchCountdown } from "@src/components/upcoming-launch-countdown";
 import { UPCOMING_LAUNCH_QUERY } from "@src/graphql/launches/queries";
 
 async function fetcher(url: string, query: string): Promise<void> {
@@ -27,21 +28,32 @@ const Home: NextPage = () => {
 
   if (error) return <div>Failed to load</div>;
 
-  console.log(data && data.upcomingLaunch);
   return (
-    <div>
+    <div className="mt-32">
       {data ? (
-        <div className="flex">
-          <div>
-            <p>Launch Name</p>
-            <p>{data.upcomingLaunch.name}</p>
+        <>
+          <div className="flex text-center justify-around w-full lg:w-1/3 m-auto">
+            <div className="lg:w-1/3">
+              <p className="text-s lg:text-base">Launch Name</p>
+              <p className="text-base lg:text-3xl">
+                {data.upcomingLaunch.name}
+              </p>
+            </div>
+            <div className="lg:w-1/3">
+              <p className="text-s lg:text-base">Rocket Name</p>
+              <p className="text-base lg:text-3xl">
+                {data.upcomingLaunch.rocket}
+              </p>
+            </div>
+            <div className="lg:w-1/3">
+              <p className="text-s lg:text-base">Launch Site Name</p>
+              <p className="text-base lg:text-3xl">
+                {data.upcomingLaunch.launchpad.name}
+              </p>
+            </div>
           </div>
-          <div>
-            <p>Rocket Name</p>
-            <p>{data.upcomingLaunch.rocket}</p>
-          </div>
-          <p>{data.upcomingLaunch.rocket}</p>
-        </div>
+          <UpcomingLaunchCountdown dateUnix={data.upcomingLaunch.dateUnix} />
+        </>
       ) : (
         <p>Loading...</p>
       )}
