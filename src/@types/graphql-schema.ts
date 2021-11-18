@@ -2,6 +2,7 @@
 /* eslint-disable */
 import { GraphQLResolveInfo } from "graphql";
 export type Maybe<T> = T | null;
+export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K];
 };
@@ -20,8 +21,8 @@ export type Scalars = {
   Float: number;
 };
 
-export type Mission = {
-  __typename?: "Mission";
+export type Launch = {
+  __typename?: "Launch";
   dateUnix: Scalars["Int"];
   details?: Maybe<Scalars["String"]>;
   name: Scalars["String"];
@@ -37,7 +38,8 @@ export type PatchLinks = {
 
 export type Query = {
   __typename?: "Query";
-  upcomingMission?: Maybe<Mission>;
+  root?: Maybe<Scalars["String"]>;
+  upcomingLaunch?: Maybe<Launch>;
 };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -149,7 +151,7 @@ export type DirectiveResolverFn<
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
   Int: ResolverTypeWrapper<Scalars["Int"]>;
-  Mission: ResolverTypeWrapper<Mission>;
+  Launch: ResolverTypeWrapper<Launch>;
   PatchLinks: ResolverTypeWrapper<PatchLinks>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars["String"]>;
@@ -159,15 +161,15 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Boolean: Scalars["Boolean"];
   Int: Scalars["Int"];
-  Mission: Mission;
+  Launch: Launch;
   PatchLinks: PatchLinks;
   Query: {};
   String: Scalars["String"];
 };
 
-export type MissionResolvers<
+export type LaunchResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes["Mission"] = ResolversParentTypes["Mission"]
+  ParentType extends ResolversParentTypes["Launch"] = ResolversParentTypes["Launch"]
 > = {
   dateUnix?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   details?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
@@ -194,15 +196,16 @@ export type QueryResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
 > = {
-  upcomingMission?: Resolver<
-    Maybe<ResolversTypes["Mission"]>,
+  root?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  upcomingLaunch?: Resolver<
+    Maybe<ResolversTypes["Launch"]>,
     ParentType,
     ContextType
   >;
 };
 
 export type Resolvers<ContextType = any> = {
-  Mission?: MissionResolvers<ContextType>;
+  Launch?: LaunchResolvers<ContextType>;
   PatchLinks?: PatchLinksResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 };
