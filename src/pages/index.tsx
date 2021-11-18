@@ -33,19 +33,19 @@ const Home: NextPage = () => {
       {data ? (
         <>
           <div className="flex flex-row flex-wrap justify-between w-full lg:w-1/3 m-auto mb-8 lg:mb-0 text-center">
-            <div className="w-2/4 lg:w-1/3">
-              <p className="text-m lg:text-base">Launch Name</p>
-              <p className="text-2xl lg:text-3xl">{data.upcomingLaunch.name}</p>
+            <div className="w-2/4 md:w-1/3">
+              <p className="text-m md:text-base">Launch Name</p>
+              <p className="text-2xl md:text-3xl">{data.upcomingLaunch.name}</p>
             </div>
-            <div className="w-2/4 lg:w-1/3">
-              <p className="text-m lg:text-base">Rocket Name</p>
-              <p className="text-2xl lg:text-3xl">
+            <div className="w-2/4 md:w-1/3">
+              <p className="text-m md:text-base">Rocket Name</p>
+              <p className="text-2xl md:text-3xl">
                 {data.upcomingLaunch.rocket}
               </p>
             </div>
-            <div className="w-full lg:w-1/3 mt-6 lg:mt-0">
-              <p className="text-m lg:text-base">Launch Site Name</p>
-              <p className="text-2xl lg:text-3xl">
+            <div className="w-full md:w-1/3 mt-6 md:mt-0">
+              <p className="text-m md:text-base">Launch Site Name</p>
+              <p className="text-2xl md:text-3xl">
                 {data.upcomingLaunch.launchpad.name}
               </p>
             </div>
