@@ -14,9 +14,9 @@ const NavLink: React.FC<{ href: string | UrlObject }> = ({
   return (
     <Link href={href} passHref>
       <a
-        className={`${classes.anchor} ${
-          pathname === href ? `${classes.active}` : ""
-        }`}
+        className={
+          classes.anchor + `${pathname === href ? ` ${classes.active}` : ""}`
+        }
       >
         {children}
       </a>
