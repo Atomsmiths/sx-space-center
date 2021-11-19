@@ -25,9 +25,18 @@ export type Launch = {
   __typename?: "Launch";
   dateUnix: Scalars["Int"];
   details?: Maybe<Scalars["String"]>;
+  launchpad?: Maybe<Launchpad>;
   name: Scalars["String"];
   patch?: Maybe<PatchLinks>;
   rocket?: Maybe<Scalars["String"]>;
+};
+
+export type Launchpad = {
+  __typename?: "Launchpad";
+  fullName?: Maybe<Scalars["String"]>;
+  locality?: Maybe<Scalars["String"]>;
+  name: Scalars["String"];
+  region?: Maybe<Scalars["String"]>;
 };
 
 export type PatchLinks = {
@@ -38,6 +47,7 @@ export type PatchLinks = {
 
 export type Query = {
   __typename?: "Query";
+  launchpad?: Maybe<Launchpad>;
   root?: Maybe<Scalars["String"]>;
   upcomingLaunch?: Maybe<Launch>;
 };
@@ -152,6 +162,7 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
   Int: ResolverTypeWrapper<Scalars["Int"]>;
   Launch: ResolverTypeWrapper<Launch>;
+  Launchpad: ResolverTypeWrapper<Launchpad>;
   PatchLinks: ResolverTypeWrapper<PatchLinks>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars["String"]>;
@@ -162,6 +173,7 @@ export type ResolversParentTypes = {
   Boolean: Scalars["Boolean"];
   Int: Scalars["Int"];
   Launch: Launch;
+  Launchpad: Launchpad;
   PatchLinks: PatchLinks;
   Query: {};
   String: Scalars["String"];
@@ -173,6 +185,11 @@ export type LaunchResolvers<
 > = {
   dateUnix?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   details?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  launchpad?: Resolver<
+    Maybe<ResolversTypes["Launchpad"]>,
+    ParentType,
+    ContextType
+  >;
   name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   patch?: Resolver<
     Maybe<ResolversTypes["PatchLinks"]>,
@@ -180,6 +197,17 @@ export type LaunchResolvers<
     ContextType
   >;
   rocket?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type LaunchpadResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Launchpad"] = ResolversParentTypes["Launchpad"]
+> = {
+  fullName?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  locality?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  region?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -196,6 +224,11 @@ export type QueryResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
 > = {
+  launchpad?: Resolver<
+    Maybe<ResolversTypes["Launchpad"]>,
+    ParentType,
+    ContextType
+  >;
   root?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   upcomingLaunch?: Resolver<
     Maybe<ResolversTypes["Launch"]>,
@@ -206,6 +239,7 @@ export type QueryResolvers<
 
 export type Resolvers<ContextType = any> = {
   Launch?: LaunchResolvers<ContextType>;
+  Launchpad?: LaunchpadResolvers<ContextType>;
   PatchLinks?: PatchLinksResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 };

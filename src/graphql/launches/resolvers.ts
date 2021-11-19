@@ -38,6 +38,22 @@ const launchesResolvers = {
         launchData = { ...launchData, rocket: rocketData.name };
       }
 
+      if (data.launchpad) {
+        const launchpadData = await fetch(
+          `https://api.spacexdata.com/v4/launchpads/${data.launchpad}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-type": "application/json",
+            },
+          },
+        ).then((response) => {
+          return response.json();
+        });
+
+        launchData = { ...launchData, launchpad: launchpadData };
+      }
+
       return launchData;
     },
   },
