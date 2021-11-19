@@ -21,16 +21,6 @@ export type Scalars = {
   Float: number;
 };
 
-export type Launch = {
-  __typename?: "Launch";
-  dateUnix: Scalars["Int"];
-  details?: Maybe<Scalars["String"]>;
-  launchpad?: Maybe<Launchpad>;
-  name: Scalars["String"];
-  patch?: Maybe<PatchLinks>;
-  rocket?: Maybe<Scalars["String"]>;
-};
-
 export type Launchpad = {
   __typename?: "Launchpad";
   fullName?: Maybe<Scalars["String"]>;
@@ -49,7 +39,17 @@ export type Query = {
   __typename?: "Query";
   launchpad?: Maybe<Launchpad>;
   root?: Maybe<Scalars["String"]>;
-  upcomingLaunch?: Maybe<Launch>;
+  upcomingLaunch?: Maybe<UpcomingLaunch>;
+};
+
+export type UpcomingLaunch = {
+  __typename?: "UpcomingLaunch";
+  dateUnix: Scalars["Int"];
+  details?: Maybe<Scalars["String"]>;
+  launchpadRegion?: Maybe<Scalars["String"]>;
+  name: Scalars["String"];
+  patch?: Maybe<PatchLinks>;
+  rocketName?: Maybe<Scalars["String"]>;
 };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -161,43 +161,22 @@ export type DirectiveResolverFn<
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
   Int: ResolverTypeWrapper<Scalars["Int"]>;
-  Launch: ResolverTypeWrapper<Launch>;
   Launchpad: ResolverTypeWrapper<Launchpad>;
   PatchLinks: ResolverTypeWrapper<PatchLinks>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars["String"]>;
+  UpcomingLaunch: ResolverTypeWrapper<UpcomingLaunch>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars["Boolean"];
   Int: Scalars["Int"];
-  Launch: Launch;
   Launchpad: Launchpad;
   PatchLinks: PatchLinks;
   Query: {};
   String: Scalars["String"];
-};
-
-export type LaunchResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes["Launch"] = ResolversParentTypes["Launch"]
-> = {
-  dateUnix?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
-  details?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
-  launchpad?: Resolver<
-    Maybe<ResolversTypes["Launchpad"]>,
-    ParentType,
-    ContextType
-  >;
-  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  patch?: Resolver<
-    Maybe<ResolversTypes["PatchLinks"]>,
-    ParentType,
-    ContextType
-  >;
-  rocket?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+  UpcomingLaunch: UpcomingLaunch;
 };
 
 export type LaunchpadResolvers<
@@ -231,15 +210,40 @@ export type QueryResolvers<
   >;
   root?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   upcomingLaunch?: Resolver<
-    Maybe<ResolversTypes["Launch"]>,
+    Maybe<ResolversTypes["UpcomingLaunch"]>,
     ParentType,
     ContextType
   >;
 };
 
+export type UpcomingLaunchResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["UpcomingLaunch"] = ResolversParentTypes["UpcomingLaunch"]
+> = {
+  dateUnix?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  details?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  launchpadRegion?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  patch?: Resolver<
+    Maybe<ResolversTypes["PatchLinks"]>,
+    ParentType,
+    ContextType
+  >;
+  rocketName?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type Resolvers<ContextType = any> = {
-  Launch?: LaunchResolvers<ContextType>;
   Launchpad?: LaunchpadResolvers<ContextType>;
   PatchLinks?: PatchLinksResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  UpcomingLaunch?: UpcomingLaunchResolvers<ContextType>;
 };

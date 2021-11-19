@@ -1,4 +1,4 @@
-import { Launch } from "@src/@types/graphql-schema";
+import { UpcomingLaunch } from "@src/@types/graphql-schema";
 
 const launchesResolvers = {
   Query: {
@@ -12,7 +12,7 @@ const launchesResolvers = {
         return response.json();
       });
 
-      let launchData: Launch = {
+      let launchData: UpcomingLaunch = {
         name: data.name,
         details: data.details,
         dateUnix: data.date_unix,
@@ -35,7 +35,7 @@ const launchesResolvers = {
           return response.json();
         });
 
-        launchData = { ...launchData, rocket: rocketData.name };
+        launchData = { ...launchData, rocketName: rocketData.name };
       }
 
       if (data.launchpad) {
@@ -51,7 +51,7 @@ const launchesResolvers = {
           return response.json();
         });
 
-        launchData = { ...launchData, launchpad: launchpadData };
+        launchData = { ...launchData, launchpadRegion: launchpadData.region };
       }
 
       return launchData;

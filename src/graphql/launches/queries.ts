@@ -3,13 +3,8 @@ const UPCOMING_LAUNCH_QUERY = `
     upcomingLaunch {
       name
       dateUnix
-      rocket
-      launchpad {
-        name
-        fullName
-        locality
-        region
-      }
+      rocketName
+      launchpadRegion
       patch {
         small
         large
