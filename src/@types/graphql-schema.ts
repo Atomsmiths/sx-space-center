@@ -40,12 +40,24 @@ export type Query = {
   launchpad?: Maybe<Launchpad>;
   root?: Maybe<Scalars["String"]>;
   upcomingLaunch?: Maybe<UpcomingLaunch>;
+  upcomingLaunches?: Maybe<Array<Maybe<UpcomingLaunches>>>;
 };
 
 export type UpcomingLaunch = {
   __typename?: "UpcomingLaunch";
   dateUnix: Scalars["Int"];
   details?: Maybe<Scalars["String"]>;
+  launchpadRegion?: Maybe<Scalars["String"]>;
+  name: Scalars["String"];
+  patch?: Maybe<PatchLinks>;
+  rocketName?: Maybe<Scalars["String"]>;
+};
+
+export type UpcomingLaunches = {
+  __typename?: "UpcomingLaunches";
+  dateUnix: Scalars["Int"];
+  details?: Maybe<Scalars["String"]>;
+  flightNumber: Scalars["Int"];
   launchpadRegion?: Maybe<Scalars["String"]>;
   name: Scalars["String"];
   patch?: Maybe<PatchLinks>;
@@ -166,6 +178,7 @@ export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars["String"]>;
   UpcomingLaunch: ResolverTypeWrapper<UpcomingLaunch>;
+  UpcomingLaunches: ResolverTypeWrapper<UpcomingLaunches>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -177,6 +190,7 @@ export type ResolversParentTypes = {
   Query: {};
   String: Scalars["String"];
   UpcomingLaunch: UpcomingLaunch;
+  UpcomingLaunches: UpcomingLaunches;
 };
 
 export type LaunchpadResolvers<
@@ -214,6 +228,11 @@ export type QueryResolvers<
     ParentType,
     ContextType
   >;
+  upcomingLaunches?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["UpcomingLaunches"]>>>,
+    ParentType,
+    ContextType
+  >;
 };
 
 export type UpcomingLaunchResolvers<
@@ -241,9 +260,36 @@ export type UpcomingLaunchResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type UpcomingLaunchesResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["UpcomingLaunches"] = ResolversParentTypes["UpcomingLaunches"]
+> = {
+  dateUnix?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  details?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  flightNumber?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  launchpadRegion?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  patch?: Resolver<
+    Maybe<ResolversTypes["PatchLinks"]>,
+    ParentType,
+    ContextType
+  >;
+  rocketName?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type Resolvers<ContextType = any> = {
   Launchpad?: LaunchpadResolvers<ContextType>;
   PatchLinks?: PatchLinksResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   UpcomingLaunch?: UpcomingLaunchResolvers<ContextType>;
+  UpcomingLaunches?: UpcomingLaunchesResolvers<ContextType>;
 };
