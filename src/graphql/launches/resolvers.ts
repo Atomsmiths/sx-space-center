@@ -1,10 +1,15 @@
 import { UpcomingLaunch, UpcomingLaunches } from "@src/@types/graphql-schema";
+import {
+  RawLaunch,
+  RawLaunchpad,
+  RawRocket,
+} from "@src/@types/rest-api-schema";
 import { deserializingFetch } from "@src/utils/deserializingFetch";
 
 const launchesResolvers = {
   Query: {
     upcomingLaunch: async () => {
-      const data = await deserializingFetch(
+      const data = await deserializingFetch<RawLaunch>(
         "https://api.spacexdata.com/v5/launches/next",
       );
 
@@ -19,7 +24,7 @@ const launchesResolvers = {
       };
 
       if (data.rocket) {
-        const rocketData = await deserializingFetch(
+        const rocketData = await deserializingFetch<RawRocket>(
           `https://api.spacexdata.com/v4/rockets/${data.rocket}`,
         );
 
@@ -27,7 +32,7 @@ const launchesResolvers = {
       }
 
       if (data.launchpad) {
-        const launchpadData = await deserializingFetch(
+        const launchpadData = await deserializingFetch<RawLaunchpad>(
           `https://api.spacexdata.com/v4/launchpads/${data.launchpad}`,
         );
 
@@ -37,11 +42,11 @@ const launchesResolvers = {
       return launchData;
     },
     upcomingLaunches: async () => {
-      const data = await deserializingFetch(
+      const data = await deserializingFetch<RawLaunch[]>(
         "https://api.spacexdata.com/v5/launches/upcoming",
       );
 
-      return data.map(async (launch: any) => {
+      return data.map(async (launch) => {
         let rocketData, launchpadData;
         let launchData: UpcomingLaunches = {
           name: launch.name,
@@ -54,16 +59,16 @@ const launchesResolvers = {
           flightNumber: launch.flight_number,
         };
 
-        if (data.rocket) {
-          rocketData = await deserializingFetch(
+        if (launch.rocket) {
+          rocketData = await deserializingFetch<RawRocket>(
             `https://api.spacexdata.com/v4/rockets/${launch.rocket}`,
           );
 
           launchData = { ...launchData, rocketName: rocketData.name };
         }
 
-        if (data.launchpad) {
-          launchpadData = await deserializingFetch(
+        if (launch.launchpad) {
+          launchpadData = await deserializingFetch<RawLaunchpad>(
             `https://api.spacexdata.com/v4/launchpads/${launch.launchpad}`,
           );
 

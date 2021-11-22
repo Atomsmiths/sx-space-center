@@ -1,6 +1,4 @@
-function deserializingFetch<T = Record<string, any>>(
-  endpoint: string,
-): Promise<T> {
+function deserializingFetch<T>(endpoint: string): Promise<T> {
   return fetch(endpoint, {
     method: "GET",
     headers: {

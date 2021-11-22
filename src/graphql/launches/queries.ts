@@ -17,7 +17,6 @@ const UPCOMING_LAUNCHES_QUERY = `
   query upcomingLaunches {
     upcomingLaunches {
       name
-      name
       dateUnix
       rocketName
       launchpadRegion
