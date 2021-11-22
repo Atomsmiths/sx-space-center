@@ -51,7 +51,6 @@ const launchesResolvers = {
       );
 
       return data.map(async (launch) => {
-        let rocketData, launchpadData;
         let launchData: UpcomingLaunches = {
           name: launch.name,
           details: launch.details,
@@ -64,7 +63,7 @@ const launchesResolvers = {
         };
 
         if (launch.rocket) {
-          rocketData = await deserializingFetch<RawRocket>(
+          const rocketData = await deserializingFetch<RawRocket>(
             `https://api.spacexdata.com/v4/rockets/${launch.rocket}`,
           );
 
@@ -72,7 +71,7 @@ const launchesResolvers = {
         }
 
         if (launch.launchpad) {
-          launchpadData = await deserializingFetch<RawLaunchpad>(
+          const launchpadData = await deserializingFetch<RawLaunchpad>(
             `https://api.spacexdata.com/v4/launchpads/${launch.launchpad}`,
           );
 
@@ -88,7 +87,6 @@ const launchesResolvers = {
       );
 
       return data.map(async (launch) => {
-        let rocketData, launchpadData;
         let launchData: PastLaunches = {
           name: launch.name,
           details: launch.details,
@@ -106,7 +104,7 @@ const launchesResolvers = {
         };
 
         if (launch.rocket) {
-          rocketData = await deserializingFetch<RawRocket>(
+          const rocketData = await deserializingFetch<RawRocket>(
             `https://api.spacexdata.com/v4/rockets/${launch.rocket}`,
           );
 
@@ -114,7 +112,7 @@ const launchesResolvers = {
         }
 
         if (launch.launchpad) {
-          launchpadData = await deserializingFetch<RawLaunchpad>(
+          const launchpadData = await deserializingFetch<RawLaunchpad>(
             `https://api.spacexdata.com/v4/launchpads/${launch.launchpad}`,
           );
 
