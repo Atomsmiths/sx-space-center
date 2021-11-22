@@ -2,21 +2,46 @@ import { gql } from "apollo-server-micro";
 
 const launches = gql`
   extend type Query {
-    upcomingLaunch: Launch
+    upcomingLaunch: UpcomingLaunch
+    upcomingLaunches: [UpcomingLaunches]
+    pastLaunches: [PastLaunches]
   }
 
-  type Launch {
+  type UpcomingLaunch {
     name: String!
     details: String
     dateUnix: Int!
-    rocket: String
-    launchpad: Launchpad
+    rocketName: String
+    launchpadRegion: String
     patch: PatchLinks
   }
 
   type PatchLinks {
     small: String
     large: String
+  }
+
+  type UpcomingLaunches {
+    name: String!
+    details: String
+    dateUnix: Int!
+    rocketName: String
+    launchpadRegion: String
+    patch: PatchLinks
+    flightNumber: Int!
+  }
+
+  type PastLaunches {
+    name: String!
+    details: String
+    dateUnix: Int!
+    rocketName: String
+    launchpadRegion: String
+    patch: PatchLinks
+    flightNumber: Int!
+    launchSuccess: Boolean
+    landAttempt: Boolean
+    landSuccess: Boolean
   }
 `;
 
