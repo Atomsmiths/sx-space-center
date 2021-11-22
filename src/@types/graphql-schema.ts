@@ -29,6 +29,20 @@ export type Launchpad = {
   region?: Maybe<Scalars["String"]>;
 };
 
+export type PastLaunches = {
+  __typename?: "PastLaunches";
+  dateUnix: Scalars["Int"];
+  details?: Maybe<Scalars["String"]>;
+  flightNumber: Scalars["Int"];
+  landAttempt?: Maybe<Scalars["Boolean"]>;
+  landSuccess?: Maybe<Scalars["Boolean"]>;
+  launchSuccess?: Maybe<Scalars["Boolean"]>;
+  launchpadRegion?: Maybe<Scalars["String"]>;
+  name: Scalars["String"];
+  patch?: Maybe<PatchLinks>;
+  rocketName?: Maybe<Scalars["String"]>;
+};
+
 export type PatchLinks = {
   __typename?: "PatchLinks";
   large?: Maybe<Scalars["String"]>;
@@ -38,6 +52,7 @@ export type PatchLinks = {
 export type Query = {
   __typename?: "Query";
   launchpad?: Maybe<Launchpad>;
+  pastLaunches?: Maybe<Array<Maybe<PastLaunches>>>;
   root?: Maybe<Scalars["String"]>;
   upcomingLaunch?: Maybe<UpcomingLaunch>;
   upcomingLaunches?: Maybe<Array<Maybe<UpcomingLaunches>>>;
@@ -174,6 +189,7 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
   Int: ResolverTypeWrapper<Scalars["Int"]>;
   Launchpad: ResolverTypeWrapper<Launchpad>;
+  PastLaunches: ResolverTypeWrapper<PastLaunches>;
   PatchLinks: ResolverTypeWrapper<PatchLinks>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars["String"]>;
@@ -186,6 +202,7 @@ export type ResolversParentTypes = {
   Boolean: Scalars["Boolean"];
   Int: Scalars["Int"];
   Launchpad: Launchpad;
+  PastLaunches: PastLaunches;
   PatchLinks: PatchLinks;
   Query: {};
   String: Scalars["String"];
@@ -204,6 +221,47 @@ export type LaunchpadResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type PastLaunchesResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["PastLaunches"] = ResolversParentTypes["PastLaunches"]
+> = {
+  dateUnix?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  details?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  flightNumber?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  landAttempt?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  landSuccess?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  launchSuccess?: Resolver<
+    Maybe<ResolversTypes["Boolean"]>,
+    ParentType,
+    ContextType
+  >;
+  launchpadRegion?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  patch?: Resolver<
+    Maybe<ResolversTypes["PatchLinks"]>,
+    ParentType,
+    ContextType
+  >;
+  rocketName?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type PatchLinksResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["PatchLinks"] = ResolversParentTypes["PatchLinks"]
@@ -219,6 +277,11 @@ export type QueryResolvers<
 > = {
   launchpad?: Resolver<
     Maybe<ResolversTypes["Launchpad"]>,
+    ParentType,
+    ContextType
+  >;
+  pastLaunches?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["PastLaunches"]>>>,
     ParentType,
     ContextType
   >;
@@ -288,6 +351,7 @@ export type UpcomingLaunchesResolvers<
 
 export type Resolvers<ContextType = any> = {
   Launchpad?: LaunchpadResolvers<ContextType>;
+  PastLaunches?: PastLaunchesResolvers<ContextType>;
   PatchLinks?: PatchLinksResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   UpcomingLaunch?: UpcomingLaunchResolvers<ContextType>;

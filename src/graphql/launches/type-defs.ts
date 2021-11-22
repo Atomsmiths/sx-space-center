@@ -4,6 +4,7 @@ const launches = gql`
   extend type Query {
     upcomingLaunch: UpcomingLaunch
     upcomingLaunches: [UpcomingLaunches]
+    pastLaunches: [PastLaunches]
   }
 
   type UpcomingLaunch {
@@ -28,6 +29,19 @@ const launches = gql`
     launchpadRegion: String
     patch: PatchLinks
     flightNumber: Int!
+  }
+
+  type PastLaunches {
+    name: String!
+    details: String
+    dateUnix: Int!
+    rocketName: String
+    launchpadRegion: String
+    patch: PatchLinks
+    flightNumber: Int!
+    launchSuccess: Boolean
+    landAttempt: Boolean
+    landSuccess: Boolean
   }
 `;
 

@@ -1,4 +1,8 @@
-import { UpcomingLaunch, UpcomingLaunches } from "@src/@types/graphql-schema";
+import {
+  PastLaunches,
+  UpcomingLaunch,
+  UpcomingLaunches,
+} from "@src/@types/graphql-schema";
 import {
   RawLaunch,
   RawLaunchpad,
@@ -57,6 +61,48 @@ const launchesResolvers = {
             large: launch.links.patch.large,
           },
           flightNumber: launch.flight_number,
+        };
+
+        if (launch.rocket) {
+          rocketData = await deserializingFetch<RawRocket>(
+            `https://api.spacexdata.com/v4/rockets/${launch.rocket}`,
+          );
+
+          launchData = { ...launchData, rocketName: rocketData.name };
+        }
+
+        if (launch.launchpad) {
+          launchpadData = await deserializingFetch<RawLaunchpad>(
+            `https://api.spacexdata.com/v4/launchpads/${launch.launchpad}`,
+          );
+
+          launchData = { ...launchData, launchpadRegion: launchpadData.region };
+        }
+
+        return launchData;
+      });
+    },
+    pastLaunches: async () => {
+      const data = await deserializingFetch<RawLaunch[]>(
+        "https://api.spacexdata.com/v5/launches/past",
+      );
+
+      return data.map(async (launch) => {
+        let rocketData, launchpadData;
+        let launchData: PastLaunches = {
+          name: launch.name,
+          details: launch.details,
+          dateUnix: launch.date_unix,
+          patch: {
+            small: launch.links.patch.small,
+            large: launch.links.patch.large,
+          },
+          flightNumber: launch.flight_number,
+          launchSuccess: launch.success,
+          landAttempt: launch.cores[0].landing_attempt,
+          landSuccess: launch.cores[0].landing_attempt
+            ? launch.cores[0].landing_success
+            : null,
         };
 
         if (launch.rocket) {

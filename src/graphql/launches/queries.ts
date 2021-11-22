@@ -29,4 +29,22 @@ const UPCOMING_LAUNCHES_QUERY = `
   }
 `;
 
-export { UPCOMING_LAUNCH_QUERY, UPCOMING_LAUNCHES_QUERY };
+const PAST_LAUNCHES_QUERY = `
+  query pastLaunches {
+    pastLaunches {
+      name
+      dateUnix
+      rocketName
+      launchpadRegion
+      patch {
+        small
+        large
+      }
+      flightNumber
+      launchSuccess
+      landAttempt
+      landSuccess
+    }
+  }
+`;
+export { UPCOMING_LAUNCH_QUERY, UPCOMING_LAUNCHES_QUERY, PAST_LAUNCHES_QUERY };
