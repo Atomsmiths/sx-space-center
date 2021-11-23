@@ -59,7 +59,9 @@ const Home: NextPage = () => {
   //         <UpcomingLaunchCountdown dateUnix={data.dateUnix} />
   //       </>
   //     ) : (
-  //       <LoadingOrbit />
+  //       <div className="flex justify-center mt-40">
+  //         <LoadingOrbit />
+  //       </div>
   //     )}
   //   </div>
   // );

@@ -1,14 +1,65 @@
-#rotation {
-  -webkit-animation: spin 8s linear infinite;
-  animation: spin 8s linear infinite;
+#perspective {
+  transform-style: preserve-3d;
+  transform: rotateX(75deg);
 }
 
-@-webkit-keyframes spin {
+#sun {
+  width: 16rem;
+  height: 16rem;
+  margin-top: 7rem;
+  margin-left: 1rem;
+  border-radius: 50%;
+  background-color: #fb7209;
+  box-shadow: 0 0 6rem rgba(255, 160, 60, 0.4);
+  transform: rotateX(-75deg);
+}
+
+#orbit {
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  width: 40rem;
+  height: 40rem;
+  margin-top: -10rem;
+  margin-left: -18rem;
+  border: 0.1rem solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  animation-name: orbit;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-duration: 3s;
+}
+
+#earth {
+  width: 3rem;
+  height: 3rem;
+  margin-top: 11rem;
+  border-radius: 50%;
+  background-color: grey;
+}
+
+.pos {
+  position: absolute;
+  transform-style: preserve-3d;
+  animation-name: invert;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes orbit {
+  0% {
+    transform: rotateZ(0deg);
+  }
   100% {
-    -webkit-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
+    transform: rotateZ(-360deg);
+  }
+}
+
+@keyframes invert {
+  0% {
+    transform: rotateX(-90deg) rotateY(360deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(-90deg) rotateY(0deg) rotateZ(0deg);
   }
 }
