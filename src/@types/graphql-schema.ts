@@ -12,6 +12,9 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
   [SubKey in K]: Maybe<T[SubKey]>;
 };
+export type RequireFields<T, K extends keyof T> = {
+  [X in Exclude<keyof T, K>]?: T[X];
+} & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -51,11 +54,61 @@ export type PatchLinks = {
 
 export type Query = {
   __typename?: "Query";
+  allRockets?: Maybe<Array<Maybe<RocketPartial>>>;
   launchpad?: Maybe<Launchpad>;
+  oneRocket?: Maybe<RocketFull>;
   pastLaunches?: Maybe<Array<Maybe<PastLaunches>>>;
   root?: Maybe<Scalars["String"]>;
   upcomingLaunch?: Maybe<UpcomingLaunch>;
   upcomingLaunches?: Maybe<Array<Maybe<UpcomingLaunches>>>;
+};
+
+export type QueryOneRocketArgs = {
+  rocketId: Scalars["String"];
+};
+
+export type RocketEngines = {
+  __typename?: "RocketEngines";
+  number?: Maybe<Scalars["Int"]>;
+  propellants?: Maybe<Array<Maybe<Scalars["String"]>>>;
+  type?: Maybe<Scalars["String"]>;
+};
+
+export type RocketFull = {
+  __typename?: "RocketFull";
+  active?: Maybe<Scalars["Boolean"]>;
+  costPerLaunch?: Maybe<Scalars["Int"]>;
+  description?: Maybe<Scalars["String"]>;
+  diameter?: Maybe<RocketSize>;
+  engines?: Maybe<RocketEngines>;
+  firstFlight?: Maybe<Scalars["String"]>;
+  height?: Maybe<RocketSize>;
+  id: Scalars["String"];
+  imagesLinks: Array<Maybe<Scalars["String"]>>;
+  mass?: Maybe<RocketMass>;
+  name: Scalars["String"];
+  stages?: Maybe<Scalars["Int"]>;
+  successRatePct?: Maybe<Scalars["Int"]>;
+  wiki?: Maybe<Scalars["String"]>;
+};
+
+export type RocketMass = {
+  __typename?: "RocketMass";
+  kg?: Maybe<Scalars["Float"]>;
+  lb?: Maybe<Scalars["Float"]>;
+};
+
+export type RocketPartial = {
+  __typename?: "RocketPartial";
+  id: Scalars["String"];
+  imagesLinks: Array<Maybe<Scalars["String"]>>;
+  name: Scalars["String"];
+};
+
+export type RocketSize = {
+  __typename?: "RocketSize";
+  feet?: Maybe<Scalars["Float"]>;
+  meters?: Maybe<Scalars["Float"]>;
 };
 
 export type UpcomingLaunch = {
@@ -187,11 +240,17 @@ export type DirectiveResolverFn<
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
+  Float: ResolverTypeWrapper<Scalars["Float"]>;
   Int: ResolverTypeWrapper<Scalars["Int"]>;
   Launchpad: ResolverTypeWrapper<Launchpad>;
   PastLaunches: ResolverTypeWrapper<PastLaunches>;
   PatchLinks: ResolverTypeWrapper<PatchLinks>;
   Query: ResolverTypeWrapper<{}>;
+  RocketEngines: ResolverTypeWrapper<RocketEngines>;
+  RocketFull: ResolverTypeWrapper<RocketFull>;
+  RocketMass: ResolverTypeWrapper<RocketMass>;
+  RocketPartial: ResolverTypeWrapper<RocketPartial>;
+  RocketSize: ResolverTypeWrapper<RocketSize>;
   String: ResolverTypeWrapper<Scalars["String"]>;
   UpcomingLaunch: ResolverTypeWrapper<UpcomingLaunch>;
   UpcomingLaunches: ResolverTypeWrapper<UpcomingLaunches>;
@@ -200,11 +259,17 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars["Boolean"];
+  Float: Scalars["Float"];
   Int: Scalars["Int"];
   Launchpad: Launchpad;
   PastLaunches: PastLaunches;
   PatchLinks: PatchLinks;
   Query: {};
+  RocketEngines: RocketEngines;
+  RocketFull: RocketFull;
+  RocketMass: RocketMass;
+  RocketPartial: RocketPartial;
+  RocketSize: RocketSize;
   String: Scalars["String"];
   UpcomingLaunch: UpcomingLaunch;
   UpcomingLaunches: UpcomingLaunches;
@@ -275,10 +340,21 @@ export type QueryResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
 > = {
+  allRockets?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["RocketPartial"]>>>,
+    ParentType,
+    ContextType
+  >;
   launchpad?: Resolver<
     Maybe<ResolversTypes["Launchpad"]>,
     ParentType,
     ContextType
+  >;
+  oneRocket?: Resolver<
+    Maybe<ResolversTypes["RocketFull"]>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryOneRocketArgs, "rocketId">
   >;
   pastLaunches?: Resolver<
     Maybe<Array<Maybe<ResolversTypes["PastLaunches"]>>>,
@@ -296,6 +372,105 @@ export type QueryResolvers<
     ParentType,
     ContextType
   >;
+};
+
+export type RocketEnginesResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["RocketEngines"] = ResolversParentTypes["RocketEngines"]
+> = {
+  number?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
+  propellants?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["String"]>>>,
+    ParentType,
+    ContextType
+  >;
+  type?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type RocketFullResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["RocketFull"] = ResolversParentTypes["RocketFull"]
+> = {
+  active?: Resolver<Maybe<ResolversTypes["Boolean"]>, ParentType, ContextType>;
+  costPerLaunch?: Resolver<
+    Maybe<ResolversTypes["Int"]>,
+    ParentType,
+    ContextType
+  >;
+  description?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  diameter?: Resolver<
+    Maybe<ResolversTypes["RocketSize"]>,
+    ParentType,
+    ContextType
+  >;
+  engines?: Resolver<
+    Maybe<ResolversTypes["RocketEngines"]>,
+    ParentType,
+    ContextType
+  >;
+  firstFlight?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  height?: Resolver<
+    Maybe<ResolversTypes["RocketSize"]>,
+    ParentType,
+    ContextType
+  >;
+  id?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  imagesLinks?: Resolver<
+    Array<Maybe<ResolversTypes["String"]>>,
+    ParentType,
+    ContextType
+  >;
+  mass?: Resolver<Maybe<ResolversTypes["RocketMass"]>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  stages?: Resolver<Maybe<ResolversTypes["Int"]>, ParentType, ContextType>;
+  successRatePct?: Resolver<
+    Maybe<ResolversTypes["Int"]>,
+    ParentType,
+    ContextType
+  >;
+  wiki?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type RocketMassResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["RocketMass"] = ResolversParentTypes["RocketMass"]
+> = {
+  kg?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  lb?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type RocketPartialResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["RocketPartial"] = ResolversParentTypes["RocketPartial"]
+> = {
+  id?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  imagesLinks?: Resolver<
+    Array<Maybe<ResolversTypes["String"]>>,
+    ParentType,
+    ContextType
+  >;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type RocketSizeResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["RocketSize"] = ResolversParentTypes["RocketSize"]
+> = {
+  feet?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  meters?: Resolver<Maybe<ResolversTypes["Float"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UpcomingLaunchResolvers<
@@ -354,6 +529,11 @@ export type Resolvers<ContextType = any> = {
   PastLaunches?: PastLaunchesResolvers<ContextType>;
   PatchLinks?: PatchLinksResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  RocketEngines?: RocketEnginesResolvers<ContextType>;
+  RocketFull?: RocketFullResolvers<ContextType>;
+  RocketMass?: RocketMassResolvers<ContextType>;
+  RocketPartial?: RocketPartialResolvers<ContextType>;
+  RocketSize?: RocketSizeResolvers<ContextType>;
   UpcomingLaunch?: UpcomingLaunchResolvers<ContextType>;
   UpcomingLaunches?: UpcomingLaunchesResolvers<ContextType>;
 };

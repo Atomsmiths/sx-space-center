@@ -24,6 +24,36 @@ type RawCores = {
 
 type RawRocket = {
   name: string;
+  flickr_images: string[];
+  id: string;
+  height: RawRocketSize;
+  diameter: RawRocketSize;
+  mass: RawRocketMass;
+  stages: number;
+  active: boolean;
+  cost_per_launch: number;
+  success_rate_pct: number;
+  wiki: string;
+  first_flight: string;
+  description: string;
+  engines: RawRocketEngines;
+};
+
+type RawRocketSize = {
+  meters: number;
+  feet: number;
+};
+
+type RawRocketMass = {
+  meters: number;
+  feet: number;
+};
+
+type RawRocketEngines = {
+  type: string;
+  number: number;
+  propellant_1: string;
+  propellant_2: string;
 };
 
 type RawLaunchpad = {
