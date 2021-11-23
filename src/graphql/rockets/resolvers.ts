@@ -1,3 +1,4 @@
+import { QueryOneRocketArgs } from "@src/@types/graphql-schema";
 import { RawRocket } from "@src/@types/rest-api-schema";
 import { deserializingFetch } from "@src/utils/deserializingFetch";
 
@@ -18,7 +19,7 @@ const rocketsResolvers = {
 
       return rocketsData;
     },
-    oneRocket: async (rocketId: string) => {
+    oneRocket: async (_: unknown, { rocketId }: QueryOneRocketArgs) => {
       const {
         name,
         id,
