@@ -1,16 +1,14 @@
 import React from "react";
 
-import ids from "./loading.module.css";
+import keys from "./loading.module.css";
 
 const Loading: React.FC = () => {
   return (
-    <div id={ids.universe}>
-      <div id={ids.galaxy}>
-        <div id={ids.sun}></div>
-        <div id={ids.mercury} className={ids.orbit}>
-          <div className={ids.pos}>
-            <div className={ids.planet}></div>
-          </div>
+    <div id={keys.mainContainer}>
+      <div id={keys.centralStar}></div>
+      <div id={keys.orbit}>
+        <div id={keys.planetPos}>
+          <div id={keys.planet}></div>
         </div>
       </div>
     </div>
