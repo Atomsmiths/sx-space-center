@@ -22,6 +22,7 @@ const launches = gql`
   }
 
   type UpcomingLaunches {
+    id: String!
     name: String!
     details: String
     dateUnix: Int!

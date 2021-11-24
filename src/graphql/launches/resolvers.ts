@@ -52,6 +52,7 @@ const launchesResolvers = {
 
       return data.map(async (launch) => {
         let launchData: UpcomingLaunches = {
+          id: launch.id,
           name: launch.name,
           details: launch.details,
           dateUnix: launch.date_unix,
