@@ -25,7 +25,7 @@
     "@graphql-codegen/cli": "2.3.0",
     "@graphql-codegen/typescript": "2.4.1",
     "@graphql-codegen/typescript-resolvers": "2.4.2",
-    "@types/node": "16.11.9",
+    "@types/node": "16.11.10",
     "@types/react": "17.0.36",
     "@typescript-eslint/eslint-plugin": "5.4.0",
     "@typescript-eslint/parser": "5.4.0",
