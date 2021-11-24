@@ -1,8 +1,8 @@
 import React from "react";
 
-import keys from "./loading.module.css";
+import keys from "./loading-component.module.css";
 
-const Loading: React.FC = () => {
+const LoadingComponent: React.FC = () => {
   return (
     <div id={keys.mainContainer}>
       <div id={keys.centralStar}></div>
@@ -15,4 +15,4 @@ const Loading: React.FC = () => {
   );
 };
 
-export { Loading };
+export { LoadingComponent };
