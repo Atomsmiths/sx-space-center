@@ -32,6 +32,7 @@ module.exports = {
       white: colors.white,
       gray: colors.gray,
       eigengrau: "hsl(240, 14%, 10%);",
+      tableRowHover: "hsla(0, 0%, 15%, 0.6)",
     },
   },
   variants: {
