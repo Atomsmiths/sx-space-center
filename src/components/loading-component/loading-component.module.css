@@ -52,8 +52,6 @@
   border: solid 1px #fff;
   transform-style: preserve-3d;
   animation-name: invert;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
 }
 
 #orbit, #planetPos {
