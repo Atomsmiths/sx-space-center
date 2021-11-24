@@ -22,8 +22,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 2rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 50%;
   border: solid 0.1px theme("colors.eigengrau");
   background-color: theme("colors.gray.100");
@@ -43,8 +43,6 @@
   border-radius: 50%;
   transform-style: preserve-3d;
   animation-name: orbit;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
 }
 
 #planetPos {
@@ -59,16 +57,25 @@
 }
 
 #orbit, #planetPos {
-  animation-duration: 2.89016s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-duration: 1.2s;
 }
 
 @keyframes orbit {
-  0%   { transform: rotateZ(0deg) }
-  100% { transform: rotateZ(-360deg) 
+  0% { 
+    transform: rotateZ(0deg) 
+  }
+  100% { 
+    transform: rotateZ(-360deg) 
   }
 }
 
 @keyframes invert {
-  0%   { transform: rotateX(-90deg) rotateY(360deg) rotateZ(0deg); }
-  100% { transform: rotateX(-90deg) rotateY(0deg) rotateZ(0deg); } 
+  0% { 
+    transform: rotateX(-90deg) rotateY(360deg) rotateZ(0deg); 
+  }
+  100% { 
+    transform: rotateX(-90deg) rotateY(0deg) rotateZ(0deg); 
+  } 
 }
