@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
           <NavLink href={"#"}>History</NavLink>
         </li>
         <li className="mr-12 ml-6">
-          <NavLink href={"#"}>Rockets</NavLink>
+          <NavLink href={"/rockets"}>Rockets</NavLink>
         </li>
         <SpaceShuttle
           size="2.5rem"
