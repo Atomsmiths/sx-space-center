@@ -1,4 +1,5 @@
 type RawLaunch = {
+  id: string;
   name: string;
   date_unix: number;
   flight_number: number;

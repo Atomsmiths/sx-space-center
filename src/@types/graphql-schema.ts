@@ -126,6 +126,7 @@ export type UpcomingLaunches = {
   dateUnix: Scalars["Int"];
   details?: Maybe<Scalars["String"]>;
   flightNumber: Scalars["Int"];
+  id: Scalars["String"];
   launchpadRegion?: Maybe<Scalars["String"]>;
   name: Scalars["String"];
   patch?: Maybe<PatchLinks>;
@@ -505,6 +506,7 @@ export type UpcomingLaunchesResolvers<
   dateUnix?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   details?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
   flightNumber?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   launchpadRegion?: Resolver<
     Maybe<ResolversTypes["String"]>,
     ParentType,
