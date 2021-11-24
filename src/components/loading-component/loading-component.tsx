@@ -8,7 +8,7 @@ const LoadingComponent: React.FC = () => {
       <div
         id={keys.centralStar}
         className="absolute left-1/2 w-20 h-20 rounded-full bg-gray-100"
-      ></div>
+      />
       <div
         id={keys.orbit}
         className="absolute left-1/2 top-1/2 w-60 h-60 rounded-full"
@@ -17,7 +17,7 @@ const LoadingComponent: React.FC = () => {
           <div
             id={keys.planet}
             className="absolute left-1/2 right-1/2 w-6 h-6 rounded-full bg-gray-100 border-eigengrau border-solid"
-          ></div>
+          />
         </div>
       </div>
     </div>
