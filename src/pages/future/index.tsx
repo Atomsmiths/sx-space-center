@@ -3,6 +3,7 @@ import React from "react";
 import useSWR from "swr";
 
 import { UpcomingLaunches } from "@src/@types/graphql-schema";
+import { TD } from "@src/components/table";
 import { UPCOMING_LAUNCHES_QUERY } from "@src/graphql/launches/queries";
 
 async function fetcher(
@@ -32,7 +33,7 @@ const FutureLaunches: React.FC = () => {
     <div className="flex flex-col justify-center items-center text-center mt-20">
       <h2 className="mb-12">Future Launches</h2>
       {data ? (
-        <table className="md:w-3/4">
+        <table className="md:w-11/12 lg:w-3/4">
           <thead className="border-b my-12">
             <tr>
               <th>#</th>
@@ -63,7 +64,7 @@ const FutureLaunches: React.FC = () => {
                   <TD>{launch.dateUnix}</TD>
                   <TD>{launch.rocketName}</TD>
                   <TD>{launch.launchpadRegion}</TD>
-                  <TD>
+                  <TD classNames="flex items-center justify-center">
                     {launch.patch.small ? (
                       <a
                         href={launch.patch.small}
@@ -93,10 +94,6 @@ const FutureLaunches: React.FC = () => {
       )}
     </div>
   );
-};
-
-const TD: React.FC = ({ children }) => {
-  return <td className="py-4">{children}</td>;
 };
 
 export default FutureLaunches;

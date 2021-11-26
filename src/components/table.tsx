@@ -1,7 +1,9 @@
 import React from "react";
 
-const Table: React.FC<{ data: Record<string, unknown> }> = ({ data }) => {
-  return <div></div>;
+const TD: React.FC<{ classNames?: string }> = ({ classNames, children }) => {
+  return (
+    <td className={`py-4 h-24 ${classNames ? classNames : ""}`}>{children}</td>
+  );
 };
 
-export { Table };
+export { TD };
