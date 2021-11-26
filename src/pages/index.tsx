@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import useSWR from "swr";
 
 import { UpcomingLaunch } from "@src/@types/graphql-schema";
+import { LoadingComponent } from "@src/components/loading-component/loading-component";
 import { UpcomingLaunchCountdown } from "@src/components/upcoming-launch-countdown";
 import { UPCOMING_LAUNCH_QUERY } from "@src/graphql/launches/queries";
 
@@ -52,7 +53,7 @@ const Home: NextPage = () => {
           <UpcomingLaunchCountdown dateUnix={data.dateUnix} />
         </>
       ) : (
-        <p>Loading...</p>
+        <LoadingComponent />
       )}
     </div>
   );
