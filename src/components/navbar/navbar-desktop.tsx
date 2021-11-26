@@ -3,9 +3,9 @@ import React from "react";
 
 import { SpaceShuttle } from "../icons/space-shuttle";
 import { NavLink } from "../nav-link";
-import classes from "./navbar.module.css";
+import classes from "./navbar-desktop.module.css";
 
-const Navbar: React.FC = () => {
+const NavbarDesktop: React.FC = () => {
   const { pathname } = useRouter();
   return (
     <nav className="hidden md:block mt-4">
@@ -80,4 +80,4 @@ const Navbar: React.FC = () => {
   );
 };
 
-export { Navbar };
+export { NavbarDesktop };

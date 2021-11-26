@@ -1,12 +1,12 @@
 import React from "react";
 
-import { Navbar } from "./navbar/navbar";
+import { NavbarDesktop } from "./navbar/navbar-desktop";
 
 const Layout: React.FC = ({ children }) => {
   return (
     <div className="w-screen min-h-screen pt-20">
       <h1>SpaceX Space Center</h1>
-      <Navbar />
+      <NavbarDesktop />
       <main>{children}</main>
     </div>
   );
