@@ -129,7 +129,7 @@ export type UpcomingLaunches = {
   id: Scalars["String"];
   launchpadRegion?: Maybe<Scalars["String"]>;
   name: Scalars["String"];
-  patch?: Maybe<PatchLinks>;
+  patch: PatchLinks;
   rocketName?: Maybe<Scalars["String"]>;
 };
 
@@ -513,11 +513,7 @@ export type UpcomingLaunchesResolvers<
     ContextType
   >;
   name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
-  patch?: Resolver<
-    Maybe<ResolversTypes["PatchLinks"]>,
-    ParentType,
-    ContextType
-  >;
+  patch?: Resolver<ResolversTypes["PatchLinks"], ParentType, ContextType>;
   rocketName?: Resolver<
     Maybe<ResolversTypes["String"]>,
     ParentType,

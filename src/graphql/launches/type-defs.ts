@@ -28,7 +28,7 @@ const launches = gql`
     dateUnix: Int!
     rocketName: String
     launchpadRegion: String
-    patch: PatchLinks
+    patch: PatchLinks!
     flightNumber: Int!
   }
 
