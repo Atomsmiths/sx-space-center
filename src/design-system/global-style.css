@@ -26,6 +26,8 @@
 
   h1 {
     font-size: theme("fontSize.4xl");
+    text-align: center;
+    letter-spacing: 0.1em;
   }
 
   h2 {
