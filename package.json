@@ -70,6 +70,7 @@
       }
     },
     "rules": {
+      "@next/next/no-img-element": "off",
       "react/prop-types": 0,
       "prettier/prettier": [
         "error",
