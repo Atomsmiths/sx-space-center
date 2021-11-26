@@ -3,6 +3,7 @@ import React from "react";
 import useSWR from "swr";
 
 import { UpcomingLaunches } from "@src/@types/graphql-schema";
+import { LoadingComponent } from "@src/components/loading-component/loading-component";
 import { TD } from "@src/components/table";
 import { UPCOMING_LAUNCHES_QUERY } from "@src/graphql/launches/queries";
 
@@ -90,7 +91,7 @@ const FutureLaunches: React.FC = () => {
       ) : error ? (
         <div>Failed to load</div>
       ) : (
-        <div>Loading...</div>
+        <LoadingComponent />
       )}
     </div>
   );
