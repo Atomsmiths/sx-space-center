@@ -31,7 +31,7 @@ const FutureLaunches: React.FC = () => {
   );
 
   return (
-    <div className="flex flex-col justify-center items-center text-center mt-20">
+    <div className="flex flex-col justify-center items-center text-center">
       <h2 className="mb-12">Future Launches</h2>
       {data ? (
         <table className="md:w-11/12 lg:w-3/4">
