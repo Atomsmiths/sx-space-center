@@ -33,6 +33,7 @@ module.exports = {
       gray: colors.gray,
       eigengrau: "hsl(240, 14%, 10%)",
       overlay: "hsla(240, 14%, 10%, 0.7)",
+      tableRowHover: "hsla(0, 0%, 15%, 0.6)",
     },
     extend: {
       transitionProperty: {
