@@ -1,10 +1,11 @@
 import { request } from "graphql-request";
-// import Image from "next/image";
 import React from "react";
 import useSWR from "swr";
 
 import classes from "./index.module.css";
 import { RocketPartial } from "@src/@types/graphql-schema";
+import { LoadingComponent } from "@src/components/loading-component/loading-component";
+import { NavLink } from "@src/components/nav-link";
 import { ALL_ROCKETS } from "@src/graphql/rockets/queries";
 
 async function fetcher(url: string, query: string): Promise<RocketPartial[]> {
@@ -23,31 +24,35 @@ const RocketsOverview: React.FC = () => {
     return <div>Failed to load</div>;
   }
 
-  console.log(data);
-
   return (
     <div>
       <h2 className="text-center">Rockets</h2>
-      <div className=" w-full flex flex-wrap pt-20 px-20">
+      <div className="w-full flex flex-wrap justify-evenly pt-12 md:pt-20 px-12 md:px-0">
         {data ? (
-          data.map(({ name, id, imagesLinks }) => {
+          data.map(({ name, id, imagesLinks }, index) => {
             return (
-              <div key={id} className={`w-1/2 pr-24 pb-24 ${classes.images}`}>
-                {/* <Image
-                  src={imagesLinks[0] ? imagesLinks[0] : ""}
-                  alt={`${name} image`}
-                  width="500"
-                  height="400"
-                /> */}
+              <NavLink
+                key={id}
+                href={`/rockets/${id}`}
+                classNames={`group w-full md:w-5/12 xl:w-1/5 mb-24 relative overflow-hidden ${classes.images}`}
+              >
                 <img
                   src={imagesLinks[0] ? imagesLinks[0] : ""}
                   alt={`${name} image`}
+                  className={`object-cover w-full h-full rounded-md ${
+                    index === 0 ? "object-top" : "object-center"
+                  }`}
                 />
-              </div>
+                <div className="flex items-center justify-center w-full h-32 absolute bottom-0 lg:-bottom-20 lg:group-hover:bottom-0 transition-inset duration-300 ease-linear bg-gradient-to-t from-overlay">
+                  <h4 className="text-center text-xl md:text-2xl filter drop-shadow-custom">
+                    {name}
+                  </h4>
+                </div>
+              </NavLink>
             );
           })
         ) : (
-          <p>Loading...</p>
+          <LoadingComponent />
         )}
       </div>
     </div>

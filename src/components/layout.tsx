@@ -9,7 +9,7 @@ const Layout: React.FC = ({ children }) => {
         SpaceX Space Center
       </h1>
       <Navbar />
-      <main className="pt-20">{children}</main>
+      <main className="pt-14 md:pt-20">{children}</main>
     </div>
   );
 };
