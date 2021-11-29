@@ -21,7 +21,7 @@ const RocketsOverview: React.FC = () => {
   );
 
   if (error) {
-    return <div>Failed to load</div>;
+    return <span>Failed to load</span>;
   }
 
   return (
