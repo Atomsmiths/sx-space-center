@@ -1,5 +1,6 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import Script from "next/script";
 import React from "react";
 
 import "tailwindcss/tailwind.css";
@@ -22,7 +23,13 @@ const SpaceCenterApp: React.FC = ({ children }) => {
         <meta name="description" content="SpaceX Space Center" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout>{children}</Layout>
+      <Layout>
+        {children}
+        <Script
+          src="https://unpkg.com/css-doodle@0.21.6/css-doodle.min.js"
+          strategy="beforeInteractive"
+        />
+      </Layout>
     </>
   );
 };
