@@ -22,7 +22,7 @@ const UpcomingLaunchCountdown: React.FC<{ dateUnix: number }> = ({
   const days = Math.floor(delta / 86400);
 
   return (
-    <div className="flex justify-center items-center lg:w-1/3 m-auto">
+    <div className="flex justify-center items-center w-11/12 lg:w-1/3 m-auto">
       <div className="w-3/12 lg:w-1/4 text-center">
         <p className="text-6xl md:text-8xl lg:text-9xl">
           {String(days).padStart(2, "0")}
