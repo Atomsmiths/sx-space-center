@@ -61,7 +61,7 @@ const NavbarDesktop: React.FC = () => {
         </li>
         <li className="mr-12 ml-6">
           <NavLink
-            href={"#"}
+            href={"/rockets"}
             classNames={
               pathname === "#"
                 ? `${classes.anchor} ${classes.active}`
