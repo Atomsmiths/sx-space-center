@@ -31,12 +31,23 @@ module.exports = {
       black: colors.black,
       white: colors.white,
       gray: colors.gray,
-      eigengrau: "hsl(240, 14%, 10%);",
+      eigengrau: "hsl(240, 14%, 10%)",
+      overlay: "hsla(240, 14%, 10%, 0.7)",
       tableRowHover: "hsla(0, 0%, 15%, 0.6)",
+    },
+    extend: {
+      transitionProperty: {
+        inset: "top, bottom, left, right",
+      },
+      dropShadow: {
+        custom: "0 0 2px rgba(0, 0, 0, 1)",
+      },
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      inset: ["group-hover"],
+    },
   },
   plugins: [],
 };

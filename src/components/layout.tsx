@@ -7,7 +7,7 @@ const Layout: React.FC = ({ children }) => {
     <div className="w-screen min-h-screen pt-20">
       <h1>SpaceX Space Center</h1>
       <Navbar />
-      <main>{children}</main>
+      <main className="pt-14 md:pt-20">{children}</main>
     </div>
   );
 };

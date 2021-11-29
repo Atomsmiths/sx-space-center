@@ -1,0 +1,11 @@
+.images {
+  height: 35rem;
+}
+
+
+@media (max-width: theme("screens.md")){
+  .images {
+    height: 20rem;
+  }
+  
+}
