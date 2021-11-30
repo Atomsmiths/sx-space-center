@@ -6,25 +6,11 @@ import { LoadingComponent } from "@src/components/loading-component/loading-comp
 import { UpcomingLaunchCountdown } from "@src/components/upcoming-launch-countdown";
 import { UPCOMING_LAUNCH_QUERY } from "@src/graphql/launches/queries";
 
-async function fetcher(url: string, query: string): Promise<UpcomingLaunch> {
-  return fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify({ query }),
-  }).then(async (response) => {
-    const unmarshalledResponse = await response.json();
-
-    return unmarshalledResponse.data.upcomingLaunch;
-  });
-}
-
 const Home: NextPage = () => {
-  const { data, error } = useSWR<UpcomingLaunch, Error>(
-    ["/api/graphql", UPCOMING_LAUNCH_QUERY],
-    fetcher,
-  );
+  const { data, error } = useSWR<UpcomingLaunch, Error>([
+    UPCOMING_LAUNCH_QUERY,
+    "upcomingLaunch",
+  ]);
 
   if (error) {
     return <div>Failed to load</div>;

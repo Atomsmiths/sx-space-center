@@ -1,4 +1,3 @@
-import { request } from "graphql-request";
 import React from "react";
 import useSWR from "swr";
 
@@ -8,17 +7,11 @@ import { LoadingComponent } from "@src/components/loading-component/loading-comp
 import { NavLink } from "@src/components/nav-link";
 import { ALL_ROCKETS } from "@src/graphql/rockets/queries";
 
-async function fetcher(url: string, query: string): Promise<RocketPartial[]> {
-  return await request(url, query).then((data) => {
-    return data.allRockets;
-  });
-}
-
 const RocketsOverview: React.FC = () => {
-  const { data, error } = useSWR<RocketPartial[], Error>(
-    ["/api/graphql", ALL_ROCKETS],
-    fetcher,
-  );
+  const { data, error } = useSWR<RocketPartial[], Error>([
+    ALL_ROCKETS,
+    "allRockets",
+  ]);
 
   if (error) {
     return <span>Failed to load</span>;

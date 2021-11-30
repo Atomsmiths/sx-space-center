@@ -7,28 +7,11 @@ import { LoadingComponent } from "@src/components/loading-component/loading-comp
 import { TD } from "@src/components/table";
 import { UPCOMING_LAUNCHES_QUERY } from "@src/graphql/launches/queries";
 
-async function fetcher(
-  url: string,
-  query: string,
-): Promise<UpcomingLaunches[]> {
-  return fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify({ query }),
-  }).then(async (response) => {
-    const unmarshalledResponse = await response.json();
-
-    return unmarshalledResponse.data.upcomingLaunches;
-  });
-}
-
 const FutureLaunches: React.FC = () => {
-  const { data, error } = useSWR<UpcomingLaunches[], Error>(
-    ["/api/graphql", UPCOMING_LAUNCHES_QUERY],
-    fetcher,
-  );
+  const { data, error } = useSWR<UpcomingLaunches[], Error>([
+    UPCOMING_LAUNCHES_QUERY,
+    "upcomingLaunches",
+  ]);
 
   return (
     <div className="flex flex-col justify-center items-center text-center">
