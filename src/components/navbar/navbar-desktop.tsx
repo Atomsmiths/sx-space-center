@@ -37,9 +37,9 @@ const NavbarDesktop: React.FC = () => {
         </li>
         <li className="mx-6">
           <NavLink
-            href={"#"}
+            href={"/past"}
             classNames={
-              pathname === "#"
+              pathname === "/past"
                 ? `${classes.anchor} ${classes.active}`
                 : `${classes.anchor}`
             }
@@ -49,9 +49,9 @@ const NavbarDesktop: React.FC = () => {
         </li>
         <li className="mx-6">
           <NavLink
-            href={"#"}
+            href={"/history"}
             classNames={
-              pathname === "#"
+              pathname === "/history"
                 ? `${classes.anchor} ${classes.active}`
                 : `${classes.anchor}`
             }
@@ -63,7 +63,7 @@ const NavbarDesktop: React.FC = () => {
           <NavLink
             href={"/rockets"}
             classNames={
-              pathname === "#"
+              pathname === "/rockets"
                 ? `${classes.anchor} ${classes.active}`
                 : `${classes.anchor}`
             }
