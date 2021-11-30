@@ -1,5 +1,7 @@
 import React from "react";
 
+import { computeUnixDate } from "@src/utils/compute-unix-date";
+
 const HomepageCountdown: React.FC<{ dateUnix: number }> = ({ dateUnix }) => {
   const [currentTime, setCurrentTime] = React.useState(
     Math.floor(Date.now() / 1000),
@@ -13,11 +15,10 @@ const HomepageCountdown: React.FC<{ dateUnix: number }> = ({ dateUnix }) => {
     return () => clearInterval(timer);
   }, []);
 
-  const delta = Math.floor(dateUnix - currentTime);
-  const seconds = delta % 60;
-  const minutes = Math.floor(delta / 60) % 60;
-  const hours = Math.floor(delta / 3600) % 24;
-  const days = Math.floor(delta / 86400);
+  const { seconds, minutes, hours, days } = computeUnixDate(
+    currentTime,
+    dateUnix,
+  );
 
   return (
     <div className="flex justify-center items-center lg:w-1/3 m-auto">
