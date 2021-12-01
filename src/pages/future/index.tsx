@@ -8,23 +8,6 @@ import { LoadingComponent } from "@src/components/loading-component/loading-comp
 import { TD } from "@src/components/table";
 import { UPCOMING_LAUNCHES_QUERY } from "@src/graphql/launches/queries";
 
-async function fetcher(
-  url: string,
-  query: string,
-): Promise<UpcomingLaunches[]> {
-  return fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify({ query }),
-  }).then(async (response) => {
-    const unmarshalledResponse = await response.json();
-
-    return unmarshalledResponse.data.upcomingLaunches;
-  });
-}
-
 const FutureLaunches: React.FC = () => {
   const [currentTime, setCurrentTime] = React.useState(
     Math.floor(Date.now() / 1000),
@@ -38,13 +21,13 @@ const FutureLaunches: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const { data, error } = useSWR<UpcomingLaunches[], Error>(
-    ["/api/graphql", UPCOMING_LAUNCHES_QUERY],
-    fetcher,
-  );
+  const { data, error } = useSWR<UpcomingLaunches[], Error>([
+    UPCOMING_LAUNCHES_QUERY,
+    "upcomingLaunches",
+  ]);
 
   return (
-    <div className="flex flex-col justify-center items-center text-center">
+    <div className="flex flex-col justify-center items-center text-center mt-20 overflow-hidden ">
       <h2 className="mb-12">Future Launches</h2>
       {data ? (
         <table className="md:w-11/12 lg:w-3/4">
