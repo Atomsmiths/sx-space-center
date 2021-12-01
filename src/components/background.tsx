@@ -7,7 +7,7 @@ const Background: React.FC = () => {
           @grid: 22x22;
           @size: 105vw 105vh;
           position: fixed;
-          z-index: 0;
+          z-index: -1;
           overflow: hidden;
         }
         
