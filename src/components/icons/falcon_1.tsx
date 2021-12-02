@@ -5,7 +5,7 @@ const Falcon1: React.FC<{
   classNames?: string;
 }> = ({ size, classNames }) => {
   return (
-    <span className={"flex items-center " + classNames}>
+    <span className={`flex items-center ${classNames ? classNames : ""}`}>
       <svg
         width={size}
         height={size}
