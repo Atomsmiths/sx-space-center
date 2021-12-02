@@ -1,14 +1,13 @@
 import React from "react";
 
 const Falcon9: React.FC<{
-  size: string;
   classNames?: string;
-}> = ({ size, classNames }) => {
+}> = ({ classNames }) => {
   return (
     <span className={`flex items-center ${classNames ? classNames : ""}`}>
       <svg
-        width={size}
-        height={size}
+        width="100%"
+        height="100%"
         fill="none"
         viewBox="0 0 20 252"
         xmlns="http://www.w3.org/2000/svg"
