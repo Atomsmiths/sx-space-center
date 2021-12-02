@@ -50,11 +50,11 @@ const NavbarMobile: React.FC = () => {
             History
           </NavLink>
           <NavLink
-            href="/rocket"
+            href="/rockets"
             onClick={() => setIsMobileNavbarOpen(false)}
             classNames={pathname === "/rockets" ? "underline" : ""}
           >
-            Rocket
+            Rockets
           </NavLink>
         </div>
       </nav>
