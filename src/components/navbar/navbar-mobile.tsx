@@ -4,21 +4,23 @@ import React from "react";
 import { SpaceRocket } from "../icons/space-rocket";
 import { NavLink } from "../nav-link";
 
-const NavbarMobile: React.FC = () => {
-  const [isMobileNavbarOpen, setIsMobileNavbarOpen] = React.useState(false);
+const NavbarMobile: React.FC<{
+  isMobileNavbarOpen: boolean;
+  setIsMobileNavbarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}> = ({ isMobileNavbarOpen, setIsMobileNavbarOpen }) => {
   const { pathname } = useRouter();
 
   return (
-    <div className="fixed bottom-0 left-0 md:-left-4 w-full h-full md:hidden">
+    <div className="md:hidden">
       <SpaceRocket
         size="2.5rem"
-        classNames="absolute bottom-8 right-8 border p-4 rounded-full bg-eigengrau z-20"
+        classNames="fixed bottom-8 right-8 border p-4 rounded-full bg-eigengrau z-20"
         onClick={() => setIsMobileNavbarOpen(!isMobileNavbarOpen)}
       />
       <nav
         className={`${
-          !isMobileNavbarOpen ? "transform translate-y-full " : ""
-        } transition-transform duration-500 ease-in-out fixed w-full h-full bg-eigengrau z-10 flex flex-col justify-center`}
+          !isMobileNavbarOpen ? "transform translate-y-full" : ""
+        } transition-transform duration-500 ease-in-out fixed w-full h-full bg-eigengrau z-10 flex flex-col justify-center bottom-0 right-0`}
       >
         <div className="flex flex-col justify-around text-center h-2/3 text-2xl">
           <NavLink
