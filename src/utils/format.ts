@@ -13,4 +13,5 @@ function formatCamelCasedWordGroup(wordGroup: string): string {
     })
   );
 }
+
 export { capitalizeFirstLetter, formatCamelCasedWordGroup };

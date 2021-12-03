@@ -3,6 +3,7 @@ import React from "react";
 import useSWR from "swr";
 
 import { RocketFull } from "@src/@types/graphql-schema";
+import { ExternalLink } from "@src/components/icons/externalLink";
 import { Falcon1 } from "@src/components/icons/falcon_1";
 import { Falcon9 } from "@src/components/icons/falcon_9";
 import { FalconHeavy } from "@src/components/icons/falcon_heavy";
@@ -112,7 +113,9 @@ const RocketPage: React.FC<{ rocketId: string }> = ({ rocketId }) => {
             : "No"
           : "N/A",
       successRate: data.successRatePct ? data.successRatePct + "%" : "N/A",
-      costPerLaunch: data.costPerLaunch ? data.costPerLaunch + "$" : "N/A",
+      costPerLaunch: data.costPerLaunch
+        ? data.costPerLaunch.toLocaleString() + "$"
+        : "N/A",
     };
 
     technicalData = {
@@ -126,7 +129,10 @@ const RocketPage: React.FC<{ rocketId: string }> = ({ rocketId }) => {
           : "N/A",
       mass:
         data.mass && data.mass.kg && data.mass.lb
-          ? [`${data.mass.kg}kg`, `${data.mass.lb}lb`]
+          ? [
+              `${data.mass.kg.toLocaleString()}kg`,
+              `${data.mass.lb.toLocaleString()}lb`,
+            ]
           : "N/A",
       stages: data.stages ? data.stages.toString() : "N/A",
       enginesType:
@@ -149,18 +155,16 @@ const RocketPage: React.FC<{ rocketId: string }> = ({ rocketId }) => {
       {data ? (
         <>
           <h2 className="text-center">{data.name} rocket</h2>
-          <div className="flex flex-col md:flex-row flex-wrap items-center md:items-start lg:items-center lg:justify-evenly px-10 pt-8 md:px-20 md:pt-20">
+          <div className="relative flex flex-col md:flex-row flex-wrap items-center md:items-start lg:items-center lg:justify-evenly px-10 pt-8 md:px-20 md:pt-20">
             <div className="md:w-1/2 lg:w-1/3 order-2 md:order-none pt-14 md:pt-0">
-              <p>{data.description}</p>
+              <p className=" leading-relaxed ">{data.description}</p>
               {data.wikipedia ? (
-                <a
-                  href={data.wikipedia}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="m-auto"
-                >
-                  Wiki
-                </a>
+                <div className="py-10 flex justify-center items-center gap-3">
+                  <a href={data.wikipedia} target="_blank" rel="noreferrer">
+                    Wiki
+                  </a>
+                  <ExternalLink size={"16"} classNames="" />
+                </div>
               ) : null}
               <RocketDataTable caption="Overview" data={nonTechnicalData} />
             </div>
