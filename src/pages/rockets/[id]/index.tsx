@@ -9,6 +9,10 @@ import { FalconHeavy } from "@src/components/icons/falcon_heavy";
 import { Starship } from "@src/components/icons/starship";
 import { LoadingComponent } from "@src/components/loading-component/loading-component";
 import { ONE_ROCKET } from "@src/graphql/rockets/queries";
+import {
+  capitalizeFirstLetter,
+  formatCamelCasedWordGroup,
+} from "@src/utils/format";
 
 function getSVGbyRocketId(
   rocketId: string,
@@ -42,6 +46,48 @@ function getSVGbyRocketId(
   return svgElement.svg;
 }
 
+const RocketDataTable: React.FC<RocketDataTableType> = ({ caption, data }) => {
+  return (
+    <table className="w-full">
+      <caption className="pb-4">{caption}</caption>
+      <tbody>
+        {Object.entries(data).map(([specName, specValue], index, array) => {
+          return (
+            <tr
+              className={index === array.length - 1 ? "" : "border-b"}
+              key={specName + index}
+            >
+              <th className="px-4 py-6 text-left">
+                {formatCamelCasedWordGroup(specName)}
+              </th>
+
+              <td className="text-center">
+                {typeof specValue === "string"
+                  ? specValue
+                  : specValue.map((value, index) => {
+                      const capitalizedValue = capitalizeFirstLetter(value);
+                      return (
+                        <>
+                          {index === 0
+                            ? capitalizedValue
+                            : ` / ${capitalizedValue}`}
+                        </>
+                      );
+                    })}
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
+};
+
+type RocketDataTableType = {
+  caption: string;
+  data: Record<string, string | string[]>;
+};
+
 const RocketPage: React.FC<{ rocketId: string }> = ({ rocketId }) => {
   const { data, error } = useSWR<RocketFull, Error>([
     ONE_ROCKET,
@@ -53,8 +99,49 @@ const RocketPage: React.FC<{ rocketId: string }> = ({ rocketId }) => {
     return <span>Failed to load</span>;
   }
 
+  let nonTechnicalData = {};
+  let technicalData = {};
+
   if (data) {
-    console.log(data);
+    nonTechnicalData = {
+      firstFlightDate: data.firstFlight ? data.firstFlight : "N/A",
+      active:
+        data.active !== undefined
+          ? data.active === true
+            ? "Yes"
+            : "No"
+          : "N/A",
+      successRate: data.successRatePct ? data.successRatePct + "%" : "N/A",
+      costPerLaunch: data.costPerLaunch ? data.costPerLaunch + "$" : "N/A",
+    };
+
+    technicalData = {
+      height:
+        data.height && data.height.meters && data.height.feet
+          ? [`${data.height.meters}m`, `${data.height.feet}ft`]
+          : "N/A",
+      diameter:
+        data.diameter && data.diameter.meters && data.diameter.feet
+          ? [`${data.diameter.meters}m`, `${data.diameter.feet}ft`]
+          : "N/A",
+      mass:
+        data.mass && data.mass.kg && data.mass.lb
+          ? [`${data.mass.kg}kg`, `${data.mass.lb}lb`]
+          : "N/A",
+      stages: data.stages ? data.stages.toString() : "N/A",
+      enginesType:
+        data.engines && data.engines.type
+          ? capitalizeFirstLetter(data.engines.type)
+          : "N/A",
+      enginesNumber:
+        data.engines && data.engines.number
+          ? data.engines.number.toString()
+          : "N/A",
+      propellants:
+        data.engines && data.engines.propellants
+          ? data.engines.propellants
+          : "N/A",
+    };
   }
 
   return (
@@ -65,84 +152,26 @@ const RocketPage: React.FC<{ rocketId: string }> = ({ rocketId }) => {
           <div className="flex flex-col md:flex-row flex-wrap items-center md:items-start lg:items-center lg:justify-evenly px-10 pt-8 md:px-20 md:pt-20">
             <div className="md:w-1/2 lg:w-1/3 order-2 md:order-none pt-14 md:pt-0">
               <p>{data.description}</p>
-              <table className="w-full mt-14">
-                <caption className="pb-4">Overview</caption>
-                <tbody>
-                  <tr className="border-b">
-                    <th className="px-4 py-6 text-left">First flight date</th>
-                    <td className="text-center">{data.firstFlight}</td>
-                  </tr>
-                  <tr className="border-b">
-                    <th className="px-4 py-6 text-left">Active</th>
-                    <td className="text-center">
-                      {data.active ? "Yes" : "No"}
-                    </td>
-                  </tr>
-                  <tr className="border-b">
-                    <th className="px-4 py-6 text-left">Success rate</th>
-                    <td className="text-center">{`${data.successRatePct} %`}</td>
-                  </tr>
-                  <tr className="">
-                    <th className="px-4 py-6 text-left">Cost per launch</th>
-                    <td className="text-center">{`${data.costPerLaunch} $`}</td>
-                  </tr>
-                </tbody>
-              </table>
               {data.wikipedia ? (
-                <a href={data.wikipedia} target="_blank" rel="noreferrer">
+                <a
+                  href={data.wikipedia}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="m-auto"
+                >
                   Wiki
                 </a>
               ) : null}
+              <RocketDataTable caption="Overview" data={nonTechnicalData} />
             </div>
             <div className="md:w-1/2 lg:w-1/4 order-1 md:order-none">
               {getSVGbyRocketId(rocketId, "w-auto h-194 md:h-204")}
             </div>
             <div className="w-full md:w-1/2 lg:w-1/3 order-3 md:order-none pt-14 md:pt-0">
-              <table className="w-full">
-                <caption className="pb-8">Technical overview</caption>
-                <tbody>
-                  <tr className="border-b">
-                    <th className="px-4 py-6 text-left">Height</th>
-                    <td className="text-center">{`${
-                      data.height
-                        ? `${data.height.meters}m ${data.height.feet}ft`
-                        : "N/A"
-                    }`}</td>
-                  </tr>
-                  <tr className="border-b">
-                    <th className="px-4 py-6 text-left">Diameter</th>
-                    <td className="text-center">
-                      {data.active ? "Yes" : "No"}
-                    </td>
-                  </tr>
-                  <tr className="border-b">
-                    <th className="px-4 py-6 text-left">Mass</th>
-                    <td className="text-center">{`${data.successRatePct} %`}</td>
-                  </tr>
-                  <tr className="border-b">
-                    <th className="px-4 py-6 text-left">Stages number</th>
-                    <td className="text-center">{data.stages}</td>
-                  </tr>
-                  <tr className="border-b">
-                    <th className="px-4 py-6 text-left">Engines type</th>
-                    <td className="text-center">
-                      {data.engines?.type?.toUpperCase()}
-                    </td>
-                  </tr>
-                  <tr className="border-b">
-                    <th className="px-4 py-6 text-left">Engines number</th>
-                    <td className="text-center">{data.engines?.number}</td>
-                  </tr>
-                  <tr className="">
-                    <th className="px-4 py-6 text-left">Propellants</th>
-                    <td className="text-center">
-                      {data.engines?.propellants?.map((propellant, index) => (
-                        <p key={index}>{propellant}</p>
-                      ))}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <RocketDataTable
+                caption="Technical overview"
+                data={technicalData}
+              />
             </div>
           </div>
         </>
