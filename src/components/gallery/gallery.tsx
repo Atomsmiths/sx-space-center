@@ -5,6 +5,9 @@ import classes from "./gallery.module.css";
 const Gallery: React.FC<{ imagesLinks: string[] }> = ({ imagesLinks }) => {
   const scrollContainer = React.useRef<null | HTMLDivElement>(null);
 
+  const [currentScrollLeft, setCurrentScrollLeft] = React.useState<number>(0);
+  const [scrollLeftMax, setScrollLeftMax] = React.useState<number>(0);
+
   function scrollToDirection(
     scrollContainer: HTMLElement,
     scrollValue: number,
@@ -14,6 +17,15 @@ const Gallery: React.FC<{ imagesLinks: string[] }> = ({ imagesLinks }) => {
       behavior: "smooth",
     });
   }
+
+  React.useEffect(() => {
+    if (scrollContainer.current) {
+      setScrollLeftMax(
+        scrollContainer.current.scrollWidth -
+          scrollContainer.current.offsetWidth,
+      );
+    }
+  }, [scrollLeftMax, currentScrollLeft]);
 
   return (
     <div className="w-11/12 overflow-hidden mx-auto mt-24">
@@ -41,37 +53,47 @@ const Gallery: React.FC<{ imagesLinks: string[] }> = ({ imagesLinks }) => {
           })}
         </div>
 
-        <div
-          className="fixed right-0 top-0 w-20 h-full bg-gradient-to-l from-overlay text-center "
-          onClick={() => {
-            if (scrollContainer.current) {
-              scrollToDirection(
-                scrollContainer.current,
-                (scrollContainer.current.scrollWidth -
-                  scrollContainer.current.offsetWidth) /
-                  2,
-              );
-            }
-          }}
-        >
-          L
-        </div>
-        <div
-          className="fixed left-0 top-0 w-20 h-full bg-gradient-to-r from-overlay text-center "
-          onClick={() => {
-            if (scrollContainer.current) {
-              scrollToDirection(
-                scrollContainer.current,
-                -(
-                  scrollContainer.current.scrollWidth -
-                  scrollContainer.current.offsetWidth
-                ) / 2,
-              );
-            }
-          }}
-        >
-          R
-        </div>
+        {currentScrollLeft <= scrollLeftMax ? (
+          <div
+            className="fixed right-0 top-0 w-20 h-full bg-gradient-to-l from-overlay text-center "
+            onClick={() => {
+              if (scrollContainer.current) {
+                scrollToDirection(
+                  scrollContainer.current,
+                  scrollContainer.current.offsetWidth,
+                );
+                setCurrentScrollLeft(
+                  currentScrollLeft + scrollContainer.current.offsetWidth,
+                );
+              }
+            }}
+          >
+            L
+          </div>
+        ) : (
+          <></>
+        )}
+
+        {currentScrollLeft !== 0 ? (
+          <div
+            className="fixed left-0 top-0 w-20 h-full bg-gradient-to-r from-overlay text-center "
+            onClick={() => {
+              if (scrollContainer.current) {
+                scrollToDirection(
+                  scrollContainer.current,
+                  -scrollContainer.current.offsetWidth,
+                );
+                setCurrentScrollLeft(
+                  currentScrollLeft - scrollContainer.current.offsetWidth,
+                );
+              }
+            }}
+          >
+            R
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
