@@ -89,7 +89,7 @@ export type RocketFull = {
   name: Scalars["String"];
   stages?: Maybe<Scalars["Int"]>;
   successRatePct?: Maybe<Scalars["Int"]>;
-  wiki?: Maybe<Scalars["String"]>;
+  wikipedia?: Maybe<Scalars["String"]>;
 };
 
 export type RocketMass = {
@@ -438,7 +438,11 @@ export type RocketFullResolvers<
     ParentType,
     ContextType
   >;
-  wiki?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  wikipedia?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
