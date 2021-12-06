@@ -62,7 +62,7 @@ const FutureLaunches: React.FC = () => {
               return (
                 <tr
                   key={launch.id}
-                  className="transition duration-500 ease-in-out hover:bg-tableRowHover"
+                  className="transition duration-500 ease-in-out odd:bg-tableRowHover"
                 >
                   <TD>{launch.flightNumber}</TD>
                   <TD>{launch.name}</TD>
