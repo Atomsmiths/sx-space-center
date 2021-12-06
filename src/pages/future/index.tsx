@@ -6,6 +6,7 @@ import { UpcomingLaunches } from "@src/@types/graphql-schema";
 import { TableCountdown } from "@src/components/countdown/table-countdown";
 import { LoadingComponent } from "@src/components/loading-component/loading-component";
 import { TD } from "@src/components/table";
+// import classes from "@src/components/table/table.module.css";
 import { UPCOMING_LAUNCHES_QUERY } from "@src/graphql/launches/queries";
 
 const FutureLaunches: React.FC = () => {
@@ -27,7 +28,7 @@ const FutureLaunches: React.FC = () => {
   ]);
 
   return (
-    <div className="flex flex-col justify-center items-center text-center mt-20 overflow-hidden ">
+    <div className="flex flex-col justify-center items-center text-center mt-20 overflow-hidden flex-wrap">
       <h2 className="mb-12">Future Launches</h2>
       {data ? (
         <table className="md:w-11/12 lg:w-3/4">
