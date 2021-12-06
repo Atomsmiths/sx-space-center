@@ -3,11 +3,24 @@ import React from "react";
 import useSWR from "swr";
 
 import { UpcomingLaunches } from "@src/@types/graphql-schema";
+import { TableCountdown } from "@src/components/countdown/table-countdown";
 import { LoadingComponent } from "@src/components/loading-component/loading-component";
 import { TD } from "@src/components/table";
 import { UPCOMING_LAUNCHES_QUERY } from "@src/graphql/launches/queries";
 
 const FutureLaunches: React.FC = () => {
+  const [currentTime, setCurrentTime] = React.useState(
+    Math.floor(Date.now() / 1000),
+  );
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(Math.floor(Date.now() / 1000));
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   const { data, error } = useSWR<UpcomingLaunches[], Error>([
     UPCOMING_LAUNCHES_QUERY,
     "upcomingLaunches",
@@ -27,7 +40,7 @@ const FutureLaunches: React.FC = () => {
                 Countdown
               </th>
               <th>
-                <p className="text-s">(UTC+0200)</p>
+                <p className="text-s">(UTC+0100)</p>
                 Date
               </th>
               <th>Rocket</th>
@@ -37,6 +50,15 @@ const FutureLaunches: React.FC = () => {
           </thead>
           <tbody>
             {data.map((launch) => {
+              // We add this check to prevent past mission to appear here,
+              // as there are issues with the data from the API:
+              // https://github.com/r-spacex/SpaceX-API/issues/874#issuecomment-912986313
+              const delta = Math.floor(launch.dateUnix - currentTime);
+              const days = Math.floor(delta / 86400);
+              if (days < 0) {
+                return null;
+              }
+
               return (
                 <tr
                   key={launch.id}
@@ -44,8 +66,17 @@ const FutureLaunches: React.FC = () => {
                 >
                   <TD>{launch.flightNumber}</TD>
                   <TD>{launch.name}</TD>
-                  <TD>WIP</TD>
-                  <TD>{launch.dateUnix}</TD>
+                  <TD>
+                    <TableCountdown
+                      dateUnix={launch.dateUnix}
+                      currentTime={currentTime}
+                    />
+                  </TD>
+                  <TD>
+                    {new Date(launch.dateUnix * 1000).toLocaleDateString(
+                      "fr-FR",
+                    )}
+                  </TD>
                   <TD>{launch.rocketName}</TD>
                   <TD>{launch.launchpadRegion}</TD>
                   <TD classNames="flex items-center justify-center">
