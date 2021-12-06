@@ -5,7 +5,7 @@ import useSWR from "swr";
 import { UpcomingLaunches } from "@src/@types/graphql-schema";
 import { TableCountdown } from "@src/components/countdown/table-countdown";
 import { LoadingComponent } from "@src/components/loading-component/loading-component";
-import { TD } from "@src/components/table";
+import { TD, TH } from "@src/components/table/table";
 // import classes from "@src/components/table/table.module.css";
 import { UPCOMING_LAUNCHES_QUERY } from "@src/graphql/launches/queries";
 
@@ -31,25 +31,25 @@ const FutureLaunches: React.FC = () => {
     <div className="flex flex-col justify-center items-center text-center mt-20 overflow-hidden flex-wrap">
       <h2 className="mb-12">Future Launches</h2>
       {data ? (
-        <table className="md:w-11/12 lg:w-3/4">
-          <thead className="border-b my-12">
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>
+        <table className="block md:table w-full md:w-11/12 lg:w-3/4">
+          <thead className="block md:table-header-group border-b my-12">
+            <tr className="block md:table-row">
+              <TH>#</TH>
+              <TH>Name</TH>
+              <TH>
                 <p className="text-s">(days:hours:mins:secs)</p>
                 Countdown
-              </th>
-              <th>
+              </TH>
+              <TH>
                 <p className="text-s">(UTC+0100)</p>
                 Date
-              </th>
-              <th>Rocket</th>
-              <th>Site</th>
-              <th>Patch</th>
+              </TH>
+              <TH>Rocket</TH>
+              <TH>Site</TH>
+              <TH>Patch</TH>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="block md:table-row-group">
             {data.map((launch) => {
               // We add this check to prevent past mission to appear here,
               // as there are issues with the data from the API:
