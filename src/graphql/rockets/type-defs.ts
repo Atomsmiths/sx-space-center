@@ -42,7 +42,7 @@ const rockets = gql`
     description: String
     engines: RocketEngines
     successRatePct: Int
-    wiki: String
+    wikipedia: String
   }
 `;
 

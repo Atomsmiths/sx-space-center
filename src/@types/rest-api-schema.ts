@@ -34,7 +34,7 @@ type RawRocket = {
   active: boolean;
   cost_per_launch: number;
   success_rate_pct: number;
-  wiki: string;
+  wikipedia: string;
   first_flight: string;
   description: string;
   engines: RawRocketEngines;

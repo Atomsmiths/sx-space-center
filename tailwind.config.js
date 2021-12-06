@@ -46,6 +46,10 @@ module.exports = {
         100: "25rem",
         130: "40rem",
       },
+      height: {
+        194: "50rem",
+        204: "60rem",
+      },
     },
   },
   variants: {
