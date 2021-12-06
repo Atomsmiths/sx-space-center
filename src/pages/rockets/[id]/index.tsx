@@ -3,10 +3,10 @@ import React from "react";
 import useSWR from "swr";
 
 import { RocketFull } from "@src/@types/graphql-schema";
-import { ExternalLink } from "@src/components/icons/externalLink";
-import { Falcon1 } from "@src/components/icons/falcon_1";
-import { Falcon9 } from "@src/components/icons/falcon_9";
-import { FalconHeavy } from "@src/components/icons/falcon_heavy";
+import { ExternalLink } from "@src/components/icons/external-link";
+import { FalconHeavy } from "@src/components/icons/falcon-heavy";
+import { Falcon1 } from "@src/components/icons/falcon1";
+import { Falcon9 } from "@src/components/icons/falcon9";
 import { Starship } from "@src/components/icons/starship";
 import { LoadingComponent } from "@src/components/loading-component/loading-component";
 import { ONE_ROCKET } from "@src/graphql/rockets/queries";
