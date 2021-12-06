@@ -37,7 +37,7 @@ const ONE_ROCKET = `
         propellants
       }
       successRatePct
-      wiki
+      wikipedia
     }
   }
 `;

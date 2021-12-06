@@ -6,7 +6,10 @@ const SpaceRocket: React.FC<{
   onClick: React.MouseEventHandler<HTMLSpanElement>;
 }> = ({ size, classNames, onClick }) => {
   return (
-    <span className={"flex items-center " + classNames} onClick={onClick}>
+    <span
+      className={`flex items-center ${classNames ? classNames : ""}`}
+      onClick={onClick}
+    >
       <svg
         stroke="currentColor"
         fill="currentColor"
