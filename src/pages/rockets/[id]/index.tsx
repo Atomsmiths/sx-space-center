@@ -68,11 +68,11 @@ const RocketDataTable: React.FC<RocketDataTableType> = ({ caption, data }) => {
                   : specValue.map((value, index) => {
                       const capitalizedValue = capitalizeFirstLetter(value);
                       return (
-                        <>
+                        <React.Fragment key={value + index}>
                           {index === 0
                             ? capitalizedValue
                             : ` / ${capitalizedValue}`}
-                        </>
+                        </React.Fragment>
                       );
                     })}
               </td>
