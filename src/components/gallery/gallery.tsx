@@ -1,5 +1,6 @@
 import React from "react";
 
+import { Arrow } from "../icons/arrow";
 import classes from "./gallery.module.css";
 
 const Gallery: React.FC<{ imagesLinks: string[] }> = ({ imagesLinks }) => {
@@ -55,7 +56,7 @@ const Gallery: React.FC<{ imagesLinks: string[] }> = ({ imagesLinks }) => {
 
         {currentScrollLeft <= scrollLeftMax ? (
           <div
-            className="fixed right-0 top-0 w-20 h-full bg-gradient-to-l from-overlay text-center "
+            className="fixed right-0 top-0 w-20 h-full bg-gradient-to-l from-overlay text-center flex cursor-pointer"
             onClick={() => {
               if (scrollContainer.current) {
                 scrollToDirection(
@@ -68,7 +69,7 @@ const Gallery: React.FC<{ imagesLinks: string[] }> = ({ imagesLinks }) => {
               }
             }}
           >
-            L
+            <Arrow size={"25"} classNames="w-full justify-center" />
           </div>
         ) : (
           <></>
@@ -76,7 +77,7 @@ const Gallery: React.FC<{ imagesLinks: string[] }> = ({ imagesLinks }) => {
 
         {currentScrollLeft !== 0 ? (
           <div
-            className="fixed left-0 top-0 w-20 h-full bg-gradient-to-r from-overlay text-center "
+            className="fixed left-0 top-0 w-20 h-full bg-gradient-to-r from-overlay text-center flex cursor-pointer"
             onClick={() => {
               if (scrollContainer.current) {
                 scrollToDirection(
@@ -89,7 +90,10 @@ const Gallery: React.FC<{ imagesLinks: string[] }> = ({ imagesLinks }) => {
               }
             }}
           >
-            R
+            <Arrow
+              size={"25"}
+              classNames="w-full justify-center transform rotate-180"
+            />
           </div>
         ) : (
           <></>
