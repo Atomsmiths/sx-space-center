@@ -58,6 +58,13 @@ const NavbarMobile: React.FC<{
           >
             Rockets
           </NavLink>
+          <NavLink
+            href="/about"
+            onClick={() => setIsMobileNavbarOpen(false)}
+            classNames={pathname === "/about" ? "underline" : ""}
+          >
+            About
+          </NavLink>
         </div>
       </nav>
     </div>
