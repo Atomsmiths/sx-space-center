@@ -5,7 +5,7 @@ import useSWR from "swr";
 import { UpcomingLaunches } from "@src/@types/graphql-schema";
 import { TableCountdown } from "@src/components/countdown/table-countdown";
 import { LoadingComponent } from "@src/components/loading-component/loading-component";
-import { TD, TH } from "@src/components/table/table";
+import { TD, TH } from "@src/components/table";
 // import classes from "@src/components/table/table.module.css";
 import { UPCOMING_LAUNCHES_QUERY } from "@src/graphql/launches/queries";
 
@@ -31,7 +31,7 @@ const FutureLaunches: React.FC = () => {
     <div className="flex flex-col justify-center items-center text-center mt-20 overflow-hidden flex-wrap">
       <h2 className="mb-12">Future Launches</h2>
       {data ? (
-        <table className="block md:table w-full md:w-11/12 lg:w-3/4">
+        <table className="block md:table w-full md:w-11/12 lg:w-3/4 text-left md:text-center">
           <thead className="block md:table-header-group border-b my-12">
             <tr className="block md:table-row">
               <TH>#</TH>
@@ -63,24 +63,27 @@ const FutureLaunches: React.FC = () => {
               return (
                 <tr
                   key={launch.id}
-                  className="transition duration-500 ease-in-out odd:bg-tableRowHover"
+                  className="block md:table-row transition duration-500 ease-in-out odd:bg-tableRowHover"
                 >
-                  <TD>{launch.flightNumber}</TD>
-                  <TD>{launch.name}</TD>
-                  <TD>
+                  <TD thLabel="#">{launch.flightNumber}</TD>
+                  <TD thLabel="Name">{launch.name}</TD>
+                  <TD thLabel="Countdown">
                     <TableCountdown
                       dateUnix={launch.dateUnix}
                       currentTime={currentTime}
                     />
                   </TD>
-                  <TD>
+                  <TD thLabel="Date">
                     {new Date(launch.dateUnix * 1000).toLocaleDateString(
                       "fr-FR",
                     )}
                   </TD>
-                  <TD>{launch.rocketName}</TD>
-                  <TD>{launch.launchpadRegion}</TD>
-                  <TD classNames="flex items-center justify-center">
+                  <TD thLabel="Rocket">{launch.rocketName}</TD>
+                  <TD thLabel="Site">{launch.launchpadRegion}</TD>
+                  <TD
+                    thLabel="Patch"
+                    classNames="flex items-center justify-center"
+                  >
                     {launch.patch.small ? (
                       <a
                         href={launch.patch.small}

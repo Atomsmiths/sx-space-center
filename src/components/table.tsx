@@ -10,14 +10,19 @@ const TH: React.FC<{ classNames?: string }> = ({ classNames, children }) => {
   );
 };
 
-const TD: React.FC<{ classNames?: string }> = ({ classNames, children }) => {
-  console.log(classes);
+const TD: React.FC<{ thLabel: string; classNames?: string }> = ({
+  thLabel,
+  classNames,
+  children,
+}) => {
   return (
     <td
-      className={`block md:table-cell py-4 h-24 mobile-table-before-td${
+      data-title="hello"
+      className={`flex justify-between md:table-cell py-4 px-6 md:px-0 h-24 mobile-table-before-td${
         classNames ? classNames : ""
       } ${classes["mobile-table-before-td"]}`}
     >
+      <p>{thLabel}</p>
       {children}
     </td>
   );

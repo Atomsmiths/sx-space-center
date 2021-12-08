@@ -1,3 +1,0 @@
-.mobile-table-before-td::before {
-  content: attr(data-title);
-}
