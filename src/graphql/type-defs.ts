@@ -1,5 +1,6 @@
 import { gql } from "apollo-server-core";
 
+import history from "./history/type-defs";
 import launches from "./launches/type-defs";
 import launchpads from "./launchpads/type-defs";
 import rockets from "./rockets/type-defs";
@@ -12,6 +13,6 @@ const root = gql`
   }
 `;
 
-const typeDefs = [root, launches, launchpads, rockets];
+const typeDefs = [root, launches, launchpads, rockets, history];
 
 export { typeDefs };
