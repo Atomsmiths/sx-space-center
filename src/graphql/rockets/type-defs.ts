@@ -9,7 +9,7 @@ const rockets = gql`
   type RocketPartial {
     name: String!
     id: String!
-    imagesLinks: [String]!
+    imagesLinks: [String!]!
   }
 
   type RocketSize {
@@ -31,7 +31,7 @@ const rockets = gql`
   type RocketFull {
     name: String!
     id: String!
-    imagesLinks: [String]!
+    imagesLinks: [String!]!
     height: RocketSize
     diameter: RocketSize
     mass: RocketMass

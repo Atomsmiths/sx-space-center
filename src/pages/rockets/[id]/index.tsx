@@ -3,6 +3,7 @@ import React from "react";
 import useSWR from "swr";
 
 import { RocketFull } from "@src/@types/graphql-schema";
+import { Gallery } from "@src/components/gallery/gallery";
 import { ExternalLink } from "@src/components/icons/external-link";
 import { FalconHeavy } from "@src/components/icons/falcon-heavy";
 import { Falcon1 } from "@src/components/icons/falcon1";
@@ -155,7 +156,7 @@ const RocketPage: React.FC<{ rocketId: string }> = ({ rocketId }) => {
       {data ? (
         <>
           <h2 className="text-center">{data.name} rocket</h2>
-          <div className="relative flex flex-col md:flex-row flex-wrap items-center md:items-start lg:items-center lg:justify-evenly px-10 pt-8 md:px-20 md:pt-20">
+          <div className="flex flex-col md:flex-row flex-wrap items-center md:items-center lg:items-center lg:justify-evenly px-10 pt-8 md:px-20 md:pt-20">
             <div className="md:w-1/2 lg:w-1/3 order-2 md:order-none pt-14 md:pt-0">
               <p className=" leading-relaxed ">{data.description}</p>
               {data.wikipedia ? (
@@ -178,6 +179,7 @@ const RocketPage: React.FC<{ rocketId: string }> = ({ rocketId }) => {
               />
             </div>
           </div>
+          <Gallery imagesLinks={data.imagesLinks} />
         </>
       ) : (
         <LoadingComponent />
