@@ -61,4 +61,16 @@ type RawLaunchpad = {
   region: string;
 };
 
-export type { RawLaunch, RawRocket, RawLaunchpad };
+type RawHistory = {
+  id: string;
+  title: string;
+  event_date_unix: string;
+  description: string;
+  links: EventLinks;
+};
+
+type EventLinks = {
+  article: string;
+};
+
+export type { RawLaunch, RawRocket, RawLaunchpad, RawHistory };

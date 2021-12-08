@@ -24,6 +24,20 @@ export type Scalars = {
   Float: number;
 };
 
+export type Event = {
+  __typename?: "Event";
+  description?: Maybe<Scalars["String"]>;
+  eventDateUnix: Scalars["Int"];
+  id: Scalars["String"];
+  links?: Maybe<EventLinks>;
+  title: Scalars["String"];
+};
+
+export type EventLinks = {
+  __typename?: "EventLinks";
+  article?: Maybe<Scalars["String"]>;
+};
+
 export type Launchpad = {
   __typename?: "Launchpad";
   fullName?: Maybe<Scalars["String"]>;
@@ -54,6 +68,7 @@ export type PatchLinks = {
 
 export type Query = {
   __typename?: "Query";
+  allHistory?: Maybe<Array<Maybe<Event>>>;
   allRockets?: Maybe<Array<Maybe<RocketPartial>>>;
   launchpad?: Maybe<Launchpad>;
   oneRocket?: Maybe<RocketFull>;
@@ -84,7 +99,7 @@ export type RocketFull = {
   firstFlight?: Maybe<Scalars["String"]>;
   height?: Maybe<RocketSize>;
   id: Scalars["String"];
-  imagesLinks: Array<Maybe<Scalars["String"]>>;
+  imagesLinks: Array<Scalars["String"]>;
   mass?: Maybe<RocketMass>;
   name: Scalars["String"];
   stages?: Maybe<Scalars["Int"]>;
@@ -101,7 +116,7 @@ export type RocketMass = {
 export type RocketPartial = {
   __typename?: "RocketPartial";
   id: Scalars["String"];
-  imagesLinks: Array<Maybe<Scalars["String"]>>;
+  imagesLinks: Array<Scalars["String"]>;
   name: Scalars["String"];
 };
 
@@ -241,6 +256,8 @@ export type DirectiveResolverFn<
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]>;
+  Event: ResolverTypeWrapper<Event>;
+  EventLinks: ResolverTypeWrapper<EventLinks>;
   Float: ResolverTypeWrapper<Scalars["Float"]>;
   Int: ResolverTypeWrapper<Scalars["Int"]>;
   Launchpad: ResolverTypeWrapper<Launchpad>;
@@ -260,6 +277,8 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars["Boolean"];
+  Event: Event;
+  EventLinks: EventLinks;
   Float: Scalars["Float"];
   Int: Scalars["Int"];
   Launchpad: Launchpad;
@@ -274,6 +293,34 @@ export type ResolversParentTypes = {
   String: Scalars["String"];
   UpcomingLaunch: UpcomingLaunch;
   UpcomingLaunches: UpcomingLaunches;
+};
+
+export type EventResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["Event"] = ResolversParentTypes["Event"]
+> = {
+  description?: Resolver<
+    Maybe<ResolversTypes["String"]>,
+    ParentType,
+    ContextType
+  >;
+  eventDateUnix?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  links?: Resolver<
+    Maybe<ResolversTypes["EventLinks"]>,
+    ParentType,
+    ContextType
+  >;
+  title?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type EventLinksResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes["EventLinks"] = ResolversParentTypes["EventLinks"]
+> = {
+  article?: Resolver<Maybe<ResolversTypes["String"]>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type LaunchpadResolvers<
@@ -341,6 +388,11 @@ export type QueryResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes["Query"] = ResolversParentTypes["Query"]
 > = {
+  allHistory?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["Event"]>>>,
+    ParentType,
+    ContextType
+  >;
   allRockets?: Resolver<
     Maybe<Array<Maybe<ResolversTypes["RocketPartial"]>>>,
     ParentType,
@@ -426,7 +478,7 @@ export type RocketFullResolvers<
   >;
   id?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   imagesLinks?: Resolver<
-    Array<Maybe<ResolversTypes["String"]>>,
+    Array<ResolversTypes["String"]>,
     ParentType,
     ContextType
   >;
@@ -461,7 +513,7 @@ export type RocketPartialResolvers<
 > = {
   id?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   imagesLinks?: Resolver<
-    Array<Maybe<ResolversTypes["String"]>>,
+    Array<ResolversTypes["String"]>,
     ParentType,
     ContextType
   >;
@@ -527,6 +579,8 @@ export type UpcomingLaunchesResolvers<
 };
 
 export type Resolvers<ContextType = any> = {
+  Event?: EventResolvers<ContextType>;
+  EventLinks?: EventLinksResolvers<ContextType>;
   Launchpad?: LaunchpadResolvers<ContextType>;
   PastLaunches?: PastLaunchesResolvers<ContextType>;
   PatchLinks?: PatchLinksResolvers<ContextType>;
