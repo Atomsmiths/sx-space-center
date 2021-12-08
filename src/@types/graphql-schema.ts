@@ -84,7 +84,7 @@ export type RocketFull = {
   firstFlight?: Maybe<Scalars["String"]>;
   height?: Maybe<RocketSize>;
   id: Scalars["String"];
-  imagesLinks: Array<Maybe<Scalars["String"]>>;
+  imagesLinks: Array<Scalars["String"]>;
   mass?: Maybe<RocketMass>;
   name: Scalars["String"];
   stages?: Maybe<Scalars["Int"]>;
@@ -101,7 +101,7 @@ export type RocketMass = {
 export type RocketPartial = {
   __typename?: "RocketPartial";
   id: Scalars["String"];
-  imagesLinks: Array<Maybe<Scalars["String"]>>;
+  imagesLinks: Array<Scalars["String"]>;
   name: Scalars["String"];
 };
 
@@ -426,7 +426,7 @@ export type RocketFullResolvers<
   >;
   id?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   imagesLinks?: Resolver<
-    Array<Maybe<ResolversTypes["String"]>>,
+    Array<ResolversTypes["String"]>,
     ParentType,
     ContextType
   >;
@@ -461,7 +461,7 @@ export type RocketPartialResolvers<
 > = {
   id?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   imagesLinks?: Resolver<
-    Array<Maybe<ResolversTypes["String"]>>,
+    Array<ResolversTypes["String"]>,
     ParentType,
     ContextType
   >;

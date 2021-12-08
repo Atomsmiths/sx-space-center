@@ -179,9 +179,7 @@ const RocketPage: React.FC<{ rocketId: string }> = ({ rocketId }) => {
               />
             </div>
           </div>
-          {data.imagesLinks[0] ? (
-            <Gallery imagesLinks={data.imagesLinks as string[]} />
-          ) : null}
+          <Gallery imagesLinks={data.imagesLinks} />
         </>
       ) : (
         <LoadingComponent />
