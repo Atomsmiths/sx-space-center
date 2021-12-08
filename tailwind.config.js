@@ -42,6 +42,10 @@ module.exports = {
       dropShadow: {
         custom: "0 0 2px rgba(0, 0, 0, 1)",
       },
+      width: {
+        100: "25rem",
+        130: "40rem",
+      },
       height: {
         194: "50rem",
         204: "60rem",
