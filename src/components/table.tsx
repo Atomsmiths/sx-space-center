@@ -1,7 +1,5 @@
 import React from "react";
 
-import classes from "./table.module.css";
-
 const TH: React.FC<{ classNames?: string }> = ({ classNames, children }) => {
   return (
     <th className={`block md:table-cell ${classNames ? classNames : ""}`}>
@@ -18,11 +16,11 @@ const TD: React.FC<{ thLabel: string; classNames?: string }> = ({
   return (
     <td
       data-title="hello"
-      className={`flex justify-between md:table-cell py-4 px-6 md:px-0 h-24 mobile-table-before-td${
+      className={`flex justify-between md:table-cell py-4 px-6 md:px-0 h-24 ${
         classNames ? classNames : ""
-      } ${classes["mobile-table-before-td"]}`}
+      }`}
     >
-      <p>{thLabel}</p>
+      <p className="md:hidden">{thLabel}</p>
       {children}
     </td>
   );
