@@ -55,6 +55,7 @@ module.exports = {
   variants: {
     extend: {
       inset: ["group-hover"],
+      backgroundColor: ["responsive", "odd", "hover", "focus"],
     },
   },
   plugins: [],
