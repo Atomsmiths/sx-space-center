@@ -1,8 +1,10 @@
 import React from "react";
 
+import classes from "./index.module.css";
+
 const AboutPage: React.FC = () => {
   return (
-    <div className="w-full flex justify-center text-center">
+    <div className="w-full flex flex-col justify-center text-center">
       <p className="text-2xl">
         Developped and maintened by{" "}
         <span className="block mt-4">
@@ -16,6 +18,20 @@ const AboutPage: React.FC = () => {
           </a>
         </span>
       </p>
+      <div className="relative w-4/5 m-auto">
+        <div className={"flex justify-center " + classes.logos}>
+          <img src="/atomsmiths-oluane.png" alt="" className="w-32 h-64" />
+          <img src="/atomsmiths-fuzznimp.png" alt="" className="w-32 h-64" />
+        </div>
+        <div className="flex justify-between">
+          <div>
+            <p>Pauline Roche (Oluane)</p>
+          </div>
+          <div>
+            <p>Anthony Montaigne (Fuzznimp)</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
