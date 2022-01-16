@@ -3,7 +3,6 @@ import React from "react";
 
 import { SpaceShuttle } from "../icons/space-shuttle";
 import { NavLink } from "../nav-link";
-import classes from "./navbar-desktop.module.css";
 
 const NavbarDesktop: React.FC = () => {
   const { pathname } = useRouter();
@@ -14,11 +13,7 @@ const NavbarDesktop: React.FC = () => {
         <li className="ml-12 mr-6">
           <NavLink
             href={"/"}
-            classNames={
-              pathname === "/"
-                ? `${classes.anchor} ${classes.active}`
-                : `${classes.anchor}`
-            }
+            classNames={pathname === "/" ? "anchor active" : "anchor"}
           >
             Home
           </NavLink>
@@ -26,11 +21,7 @@ const NavbarDesktop: React.FC = () => {
         <li className="mx-6">
           <NavLink
             href={"/future"}
-            classNames={
-              pathname === "/future"
-                ? `${classes.anchor} ${classes.active}`
-                : `${classes.anchor}`
-            }
+            classNames={pathname === "/future" ? "anchor active" : "anchor"}
           >
             Future
           </NavLink>
@@ -38,11 +29,7 @@ const NavbarDesktop: React.FC = () => {
         <li className="mx-6">
           <NavLink
             href={"/past"}
-            classNames={
-              pathname === "/past"
-                ? `${classes.anchor} ${classes.active}`
-                : `${classes.anchor}`
-            }
+            classNames={pathname === "/past" ? "anchor active" : "anchor"}
           >
             Past
           </NavLink>
@@ -50,11 +37,7 @@ const NavbarDesktop: React.FC = () => {
         <li className="mx-6">
           <NavLink
             href={"/history"}
-            classNames={
-              pathname === "/history"
-                ? `${classes.anchor} ${classes.active}`
-                : `${classes.anchor}`
-            }
+            classNames={pathname === "/history" ? "anchor active" : "anchor"}
           >
             History
           </NavLink>
@@ -62,13 +45,17 @@ const NavbarDesktop: React.FC = () => {
         <li className="mr-12 ml-6">
           <NavLink
             href={"/rockets"}
-            classNames={
-              pathname === "/rockets"
-                ? `${classes.anchor} ${classes.active}`
-                : `${classes.anchor}`
-            }
+            classNames={pathname === "/rockets" ? "anchor active" : "anchor"}
           >
             Rockets
+          </NavLink>
+        </li>
+        <li className="mr-12">
+          <NavLink
+            href={"/about"}
+            classNames={pathname === "/about" ? "anchor active" : "anchor"}
+          >
+            About
           </NavLink>
         </li>
         <SpaceShuttle

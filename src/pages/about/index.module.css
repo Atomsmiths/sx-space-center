@@ -1,0 +1,49 @@
+.logos{
+  animation-name: spinningLogos;
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
+}
+
+/* .logos img {
+  position: absolute;
+} */
+
+.logos img:first-child {
+  animation-name: splitLeft;
+  animation-duration: 1s;
+  animation-timing-function: ease-in;
+  animation-delay: 1.1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.logos img:last-child {
+  animation-name: splitRight;
+  animation-duration: 1s;
+  animation-timing-function: ease-in;
+  animation-delay: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes spinningLogos {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes splitLeft {
+  
+  to {
+    transform: translateX(-300%);
+    
+  }
+}
+
+@keyframes splitRight {
+  100% {
+    /* transform: translateX(500px); */
+    /* right: -200px; */
+  }
+}
